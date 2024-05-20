@@ -274,7 +274,7 @@ public class CoolDatabaseBrowser {
 
 
                 // now crete rdf with new process descriptions for the existing foreign runType
-                for (JCGProcess prc : c.getPrcesses()) {
+                for (JCGProcess prc : c.getProcesses()) {
 
                     // update process name, replacing old supervisor name with the new one
 //                prc.setName(prc.getName().replace(oldRunType,c.getName()));
@@ -470,7 +470,7 @@ public class CoolDatabaseBrowser {
                 // isCodaComponent
                 out.write("   <cool:isCodaComponent>" + gc.isCodaComponent() + "</cool:isCodaComponent>\n");
 
-                for (JCGLink link : gc.getLnks()) {
+                for (JCGLink link : gc.getLinks()) {
                     if(!link.getSourceComponentName().equals(gc.getName())) {
                         // streamID = linked component name
                         out.write("   <cool:linkedTo>" + link.getSourceComponentName() + "</cool:linkedTo>\n");
@@ -529,9 +529,9 @@ public class CoolDatabaseBrowser {
                 }
 
                 // links
-                if (gc.getLnks() != null && !gc.getLnks().isEmpty()) {
+                if (gc.getLinks() != null && !gc.getLinks().isEmpty()) {
 
-                    for (JCGLink link : gc.getLnks()) {
+                    for (JCGLink link : gc.getLinks()) {
 
                         out.write("\n");
                         out.write("   <cool:include rdf:resource=\"" + JCGSetup.COOL_HTTP_BASE + "Control/" + runType + "/Links/" + link.getName() + ".rdf\"/>\n");
@@ -567,9 +567,9 @@ public class CoolDatabaseBrowser {
                 }
 
                 // processes
-                if (gc.getPrcesses() != null && !gc.getPrcesses().isEmpty()) {
+                if (gc.getProcesses() != null && !gc.getProcesses().isEmpty()) {
 
-                    for (JCGProcess prc : gc.getPrcesses()) {
+                    for (JCGProcess prc : gc.getProcesses()) {
                         out.write("\n");
                         out.write("   <cool:include rdf:resource=\"" + JCGSetup.COOL_HTTP_BASE + "Control/" + runType + "/Processes/" + prc.getName() + ".rdf\"/>\n");
                         out.write("   <cool:hasProcess rdf:resource=\"" + JCGSetup.COOL_HTTP_BASE + "Control/" + runType + "/Processes/" + prc.getName() + "#" + prc.getName() + "\"/>\n\n");

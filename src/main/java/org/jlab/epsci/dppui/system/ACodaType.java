@@ -24,6 +24,15 @@ package org.jlab.epsci.dppui.system;
 
 public enum ACodaType {
     USR  (10),
+    ACTOR  (11),
+    HISTOGRAP_SINK  (12),
+    DEVNULL_SINK  (13),
+    LOAD_BALANCER  (20),
+    REASSEMBLY  (21),
+    APPLICATION  (30),
+    SHELL_PROCESS  (31),
+    DOCKER_CONTAINER  (32),
+    ET  (40),
     SLC  (110),
     WNC  (210),
     ER   (310),

@@ -46,7 +46,7 @@ public class JCGComponent {
     private int                                    id;
     private String                                 name                 = "";
     private String                                 type                 = "";
-    private String                                 subType              = "Et";
+    private String                                 subType              = "ET";
     private String                                 rol1                 = "undefined";
     private String                                 rol1UsrString        = "undefined";
     private String                                 rol2                 = "";
@@ -76,6 +76,25 @@ public class JCGComponent {
     private Set<JCGProcess> processes
             = Collections.synchronizedSet(new HashSet<>());
     private BufferedImage                          image;
+
+    private String deployHost = "undefined";
+    private String deployCli = "undefined";
+
+    public String getDeployHost() {
+        return deployHost;
+    }
+
+    public void setDeployHost(String deployHost) {
+        this.deployHost = deployHost;
+    }
+
+    public String getDeployCli() {
+        return deployCli;
+    }
+
+    public void setDeployCli(String deployCli) {
+        this.deployCli = deployCli;
+    }
 
     public JCGComponent(){
         module = new JCGModule();
@@ -242,20 +261,20 @@ public class JCGComponent {
         module.setId(id);
     }
 
-    public Set<JCGProcess> getPrcesses() {
+    public Set<JCGProcess> getProcesses() {
         return processes;
     }
 
-    public void setPrcesses(Set<JCGProcess> processes) {
+    public void setProcesses(Set<JCGProcess> processes) {
         this.processes = processes;
     }
 
-    public void addPrcess(JCGProcess p){
-        removePrcess(p);
+    public void addProcess(JCGProcess p){
+        removeProcess(p);
         processes.add(p);
     }
 
-    public void removePrcess(JCGProcess pn){
+    public void removeProcess(JCGProcess pn){
         JCGProcess p = null;
         for(JCGProcess tmp:processes){
             if(tmp.getName().equals(pn.getName())){
@@ -312,26 +331,26 @@ public class JCGComponent {
         this.rol2UsrString = rol2UsrString;
     }
 
-    public Set<JCGTransport> getTrnsports() {
+    public Set<JCGTransport> getTransports() {
         return transports;
     }
 
-    public void setTrnsports(Set<JCGTransport> transports) {
+    public void setTransports(Set<JCGTransport> transports) {
         this.transports = transports;
     }
 
-    public void addTrnsport(JCGTransport transport) {
-        removeTrnsport(transport);
+    public void addTransport(JCGTransport transport) {
+        removeTransport(transport);
         transports.add(transport);
     }
 
 
-    public void removeTrnsports(){
+    public void removeTransports(){
         if(transports!=null && !transports.isEmpty())
             transports.clear();
     }
 
-    public void removeTrnsport(JCGTransport tn){
+    public void removeTransport(JCGTransport tn){
         JCGTransport t = null;
         for(JCGTransport tmp:transports){
             if(tmp.getName().equals(tn.getName())){
@@ -343,36 +362,27 @@ public class JCGComponent {
             transports.remove(t);
     }
 
-    public Set<JCGLink> getLnks() {
+    public Set<JCGLink> getLinks() {
         return links;
     }
 
-    public void setLnks(Set<JCGLink> links) {
+    public void setLinks(Set<JCGLink> links) {
         this.links = links;
     }
 
-    public void addLnk(JCGLink link) {
-        removeLnk(link);
+    public void addLink(JCGLink link) {
+        removeLink(link);
         links.add(link);
-//
-//        boolean found = false;
-//        for(JCGLink l: links){
-//            if(l.getName().equals(link.getName())){
-//                found = true;
-//                break;
-//            }
-//        }
-//        if(!found)links.add(link);
-    }
+     }
 
 
-    public void removeLnks() {
+    public void removeLinks() {
         if(links!=null && !links.isEmpty()){
             links.clear();
         }
     }
 
-    public void removeLnk(JCGLink ln){
+    public void removeLink(JCGLink ln){
         JCGLink l = null;
         for(JCGLink tmp:links){
             if(tmp.getName().equals(ln.getName())){
@@ -517,7 +527,6 @@ public class JCGComponent {
         if (Double.compare(that.getH(), h) != 0) return false;
         if (id != that.id) return false;
         if (isMaster != that.isMaster) return false;
-//        if (preDefined != that.isPreDefined()) return false;
         if (priority != that.getPriority()) return false;
         if (Double.compare(that.getPx(), px) != 0) return false;
         if (Double.compare(that.getPy(), py) != 0) return false;
@@ -536,11 +545,11 @@ public class JCGComponent {
         if (!description.equals(that.getDescription())) return false;
 
 
-        if(links.size()!=that.getLnks().size()) return false;
+        if(links.size()!=that.getLinks().size()) return false;
         else {
             for(JCGLink t_this:links){
                 boolean f = false;
-                for(JCGLink t_that:that.getLnks()){
+                for(JCGLink t_that:that.getLinks()){
                     if(t_this.equals(t_that)){
                         f = true;
                         break;
@@ -550,11 +559,11 @@ public class JCGComponent {
             }
         }
 
-        if(processes.size()!=that.getPrcesses().size()) return false;
+        if(processes.size()!=that.getProcesses().size()) return false;
         else {
             for(JCGProcess t_this:processes){
                 boolean f = false;
-                for(JCGProcess t_that:that.getPrcesses()){
+                for(JCGProcess t_that:that.getProcesses()){
                     if(t_this.equals(t_that)){
                         f = true;
                         break;
@@ -564,11 +573,11 @@ public class JCGComponent {
             }
         }
 
-        if(transports.size()!=that.getTrnsports().size()) return false;
+        if(transports.size()!=that.getTransports().size()) return false;
         else {
              for(JCGTransport t_this:transports){
                  boolean f = false;
-                 for(JCGTransport t_that:that.getTrnsports()){
+                 for(JCGTransport t_that:that.getTransports()){
                      if(t_this.equals(t_that)){
                          f = true;
                          break;
@@ -584,34 +593,37 @@ public class JCGComponent {
     public String toString() {
         return "JCGComponent{" +
                 "x=" + x +
-                ",\n y=" + y +
-                ",\n gridX=" + gridX +
-                ",\n gridY=" + gridY +
-                ",\n w=" + w +
-                ",\n h=" + h +
-                ",\n px=" + px +
-                ",\n py=" + py +
-                ",\n id=" + id +
-                ",\n name='" + name + '\'' +
-                ",\n type='" + type + '\'' +
-                ",\n subType='" + subType + '\'' +
-                ",\n rol1='" + rol1 + '\'' +
-                ",\n rol1UsrString='" + rol1UsrString + '\'' +
-                ",\n rol2='" + rol2 + '\'' +
-                ",\n rol2UsrString='" + rol2UsrString + '\'' +
-                ",\n description='" + description + '\'' +
-                ",\n userConfig='" + userConfig + '\'' +
-                ",\n codaComponent=" + codaComponent +
-                ",\n codaVersion2=" + isStreaming +
-                ",\n preDefined=" + preDefined +
-                ",\n nodeList='" + nodeList + '\'' +
-                ",\n command='" + command + '\'' +
-                ",\n isMaster=" + isMaster +
-                ",\n module=" + module +
-                ",\n links=" + links +
-                ",\n transports=" + transports +
-                ",\n processes=" + processes +
-                ",\n image=" + image +
+                ", y=" + y +
+                ", gridX=" + gridX +
+                ", gridY=" + gridY +
+                ", w=" + w +
+                ", h=" + h +
+                ", px=" + px +
+                ", py=" + py +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", subType='" + subType + '\'' +
+                ", rol1='" + rol1 + '\'' +
+                ", rol1UsrString='" + rol1UsrString + '\'' +
+                ", rol2='" + rol2 + '\'' +
+                ", rol2UsrString='" + rol2UsrString + '\'' +
+                ", description='" + description + '\'' +
+                ", userConfig='" + userConfig + '\'' +
+                ", priority=" + priority +
+                ", codaComponent=" + codaComponent +
+                ", isStreaming=" + isStreaming +
+                ", preDefined=" + preDefined +
+                ", nodeList='" + nodeList + '\'' +
+                ", command='" + command + '\'' +
+                ", isMaster=" + isMaster +
+                ", module=" + module +
+                ", links=" + links +
+                ", transports=" + transports +
+                ", processes=" + processes +
+                ", image=" + image +
+                ", deployHost='" + deployHost + '\'' +
+                ", deployCli='" + deployCli + '\'' +
                 '}';
     }
 }

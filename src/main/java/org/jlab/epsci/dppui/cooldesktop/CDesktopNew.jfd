@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {par l {comp panel2::l:::x:1, comp panel3::l:::x:1, seq {space :::p, par l {seq {comp scrollPane1:::p:296:p, space :0:0:x}, comp CompPanel::t:::x}}}, space :::p, par l {comp toolBar1::::849:x, comp scrollPane2::t::849:x}, space :::p}}</string>
+        <string>par l {seq t {par t {seq {space :::p, comp scrollPane2::::1151:x}, seq {comp panel2:::p::p:1, space u:::p, comp panel3:::p::p:1, space s:::p, comp linkModeCheckBox:::p::p, space s:::p, comp groupModeCheckBox:::p::p, space ::215:x, comp CompPanel:::p::p}}, space :::p}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq t {space :p:6:p, par l {seq {comp toolBar1:::p:22:p, space :::p, comp scrollPane2:::::x:2}, seq {comp panel2:::p::p, space :::p, comp panel3:::p:43:p, space :::p, comp CompPanel:::p::p, space :::p, comp scrollPane1:::p:671:p, space :0:0:x}}, space :12:12:p}}</string>
+        <string>par l {seq t {par l {seq {space :p:6:p, par l:::p {comp CompPanel::t:::x, comp panel2::l:::x, comp panel3::l:::x}}, seq l {space :p:15:p, par b {comp linkModeCheckBox::b:p:18:p, comp groupModeCheckBox::b:p:18:p}}}, space u:::p, comp scrollPane2::::765:x:2, space :p:12:p}}</string>
        </void>
       </object>
       <void method="add">
@@ -48,11 +48,11 @@ scrollPane2.setViewportView(drawingCanvas);
          <class>org.jdesktop.layout.GroupLayout</class>
          <void method="setProperty">
           <string>$horizontalGroup</string>
-          <string>par l {seq l {space :::p, comp expidLabel:::::x, space :::p}}</string>
+          <string>par l {seq l {space :::p, comp expidLabel::::200:x, space :::p}}</string>
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
-          <string>par l {seq l {comp expidLabel::::15:x, space :::p}}</string>
+          <string>par l {seq l {comp expidLabel::::0:x, space :::p}}</string>
          </void>
         </object>
         <void method="setProperty">
@@ -108,11 +108,11 @@ scrollPane2.setViewportView(drawingCanvas);
          <class>org.jdesktop.layout.GroupLayout</class>
          <void method="setProperty">
           <string>$horizontalGroup</string>
-          <string>par l {seq l {space :::p, comp configNameLabel:::::x, space :::p}}</string>
+          <string>par l {seq l {space :::x, comp configNameLabel:::p:234:p}}</string>
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
-          <string>par l {seq t {comp configNameLabel::::0:x, space :p:106:p}}</string>
+          <string>par l {comp configNameLabel::l::0:x}</string>
          </void>
         </object>
         <void method="setProperty">
@@ -150,129 +150,6 @@ scrollPane2.setViewportView(drawingCanvas);
             <string>configNameLabelMouseClicked</string>
             <boolean>true</boolean>
            </object>
-          </void>
-         </object>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="com.jformdesigner.model.FormContainer">
-        <string>javax.swing.JScrollPane</string>
-        <object class="com.jformdesigner.model.FormLayoutManager">
-         <class>javax.swing.JScrollPane</class>
-        </object>
-        <void method="setProperty">
-         <string>border</string>
-         <object class="javax.swing.border.TitledBorder">
-          <null/>
-          <string></string>
-          <int>4</int>
-          <int>0</int>
-          <object class="java.awt.Font">
-           <string>Bitstream Charter</string>
-           <int>0</int>
-           <int>11</int>
-          </object>
-          <object class="java.awt.Color">
-           <int>0</int>
-           <int>102</int>
-           <int>102</int>
-           <int>255</int>
-          </object>
-         </object>
-        </void>
-        <void method="setProperty">
-         <string>horizontalScrollBarPolicy</string>
-         <int>31</int>
-        </void>
-        <void property="name">
-         <string>scrollPane1</string>
-        </void>
-        <void method="add">
-         <object class="com.jformdesigner.model.FormComponent" id="FormComponent0">
-          <string>javax.swing.JList</string>
-          <void method="setProperty">
-           <string>foreground</string>
-           <object class="java.awt.Color">
-            <int>102</int>
-            <int>51</int>
-            <int>0</int>
-            <int>255</int>
-           </object>
-          </void>
-          <void property="name">
-           <string>componentNameList</string>
-          </void>
-          <void method="auxiliary">
-           <void method="setProperty">
-            <string>JavaCodeGenerator.customCreate</string>
-            <boolean>true</boolean>
-           </void>
-          </void>
-         </object>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="com.jformdesigner.model.FormContainer">
-        <string>javax.swing.JToolBar</string>
-        <object class="com.jformdesigner.model.FormLayoutManager">
-         <class>javax.swing.JToolBar</class>
-        </object>
-        <void property="name">
-         <string>toolBar1</string>
-        </void>
-        <void method="add">
-         <object class="com.jformdesigner.model.FormComponent">
-          <string>javax.swing.JCheckBox</string>
-          <void method="setProperty">
-           <string>action</string>
-           <object class="com.jformdesigner.model.FormReference">
-            <string>action11</string>
-           </object>
-          </void>
-          <void method="setProperty">
-           <string>foreground</string>
-           <object class="java.awt.Color">
-            <int>0</int>
-            <int>102</int>
-            <int>102</int>
-            <int>255</int>
-           </object>
-          </void>
-          <void property="name">
-           <string>linkModeCheckBox</string>
-          </void>
-         </object>
-        </void>
-        <void method="add">
-         <object class="com.jformdesigner.model.FormComponent">
-          <string>javax.swing.JLabel</string>
-          <void property="name">
-           <string>afecsHomeLabel</string>
-          </void>
-         </object>
-        </void>
-        <void method="add">
-         <object class="com.jformdesigner.model.FormComponent">
-          <string>javax.swing.JCheckBox</string>
-          <void method="setProperty">
-           <string>foreground</string>
-           <object class="java.awt.Color">
-            <int>0</int>
-            <int>102</int>
-            <int>102</int>
-            <int>255</int>
-           </object>
-          </void>
-          <void method="setProperty">
-           <string>action</string>
-           <object class="com.jformdesigner.model.FormReference">
-            <string>action39</string>
-           </object>
-          </void>
-          <void property="name">
-           <string>groupModeCheckBox</string>
           </void>
          </object>
         </void>
@@ -739,6 +616,33 @@ scrollPane2.setViewportView(drawingCanvas);
                 </void>
                </object>
               </void>
+              <void method="add">
+               <object class="com.jformdesigner.model.FormComponent">
+                <string>javax.swing.JPopupMenu$Separator</string>
+                <void property="name">
+                 <string>separator48</string>
+                </void>
+               </object>
+              </void>
+              <void method="add">
+               <object class="com.jformdesigner.model.FormComponent">
+                <string>javax.swing.JMenuItem</string>
+                <void method="setProperty">
+                 <string>text</string>
+                 <string>ET</string>
+                </void>
+                <void method="setProperty">
+                 <string>icon</string>
+                 <object class="com.jformdesigner.model.SwingIcon">
+                  <int>0</int>
+                  <string>/ET.png</string>
+                 </object>
+                </void>
+                <void property="name">
+                 <string>menuItem38</string>
+                </void>
+               </object>
+              </void>
              </object>
             </void>
            </object>
@@ -842,7 +746,7 @@ scrollPane2.setViewportView(drawingCanvas);
               <string>javax.swing.JMenuItem</string>
               <void method="setProperty">
                <string>text</string>
-               <string>Histogram Actor</string>
+               <string>Histogram Sink</string>
               </void>
               <void method="setProperty">
                <string>icon</string>
@@ -853,6 +757,33 @@ scrollPane2.setViewportView(drawingCanvas);
               </void>
               <void property="name">
                <string>histoActorMI</string>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object class="com.jformdesigner.model.FormComponent">
+              <string>javax.swing.JPopupMenu$Separator</string>
+              <void property="name">
+               <string>separator28</string>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object class="com.jformdesigner.model.FormComponent">
+              <string>javax.swing.JMenuItem</string>
+              <void method="setProperty">
+               <string>text</string>
+               <string>DevNull Sink</string>
+              </void>
+              <void method="setProperty">
+               <string>icon</string>
+               <object class="com.jformdesigner.model.SwingIcon">
+                <int>0</int>
+                <string>/DevNullSink.png</string>
+               </object>
+              </void>
+              <void property="name">
+               <string>menuItem37</string>
               </void>
              </object>
             </void>
@@ -1035,6 +966,52 @@ scrollPane2.setViewportView(drawingCanvas);
            </object>
           </void>
          </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JCheckBox</string>
+        <void method="setProperty">
+         <string>action</string>
+         <object class="com.jformdesigner.model.FormReference">
+          <string>action11</string>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color">
+          <int>0</int>
+          <int>102</int>
+          <int>102</int>
+          <int>255</int>
+         </object>
+        </void>
+        <void property="name">
+         <string>linkModeCheckBox</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JCheckBox</string>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color">
+          <int>0</int>
+          <int>102</int>
+          <int>102</int>
+          <int>255</int>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>action</string>
+         <object class="com.jformdesigner.model.FormReference">
+          <string>action39</string>
+         </object>
+        </void>
+        <void property="name">
+         <string>groupModeCheckBox</string>
         </void>
        </object>
       </void>
@@ -2032,7 +2009,7 @@ scrollPane2.setViewportView(drawingCanvas);
        <string>location</string>
        <object class="java.awt.Point">
         <int>0</int>
-        <int>0</int>
+        <int>5</int>
        </object>
       </void>
       <void method="setProperty">
@@ -2066,7 +2043,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>275</int>
+        <int>280</int>
         <int>895</int>
        </object>
       </void>
@@ -2102,7 +2079,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>55</int>
+        <int>60</int>
         <int>895</int>
        </object>
       </void>
@@ -2134,7 +2111,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>110</int>
+        <int>115</int>
         <int>895</int>
        </object>
       </void>
@@ -2166,7 +2143,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>900</int>
        </object>
       </void>
@@ -2198,7 +2175,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>165</int>
+        <int>170</int>
         <int>895</int>
        </object>
       </void>
@@ -2234,7 +2211,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>220</int>
+        <int>225</int>
         <int>895</int>
        </object>
       </void>
@@ -2270,7 +2247,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>330</int>
+        <int>335</int>
         <int>895</int>
        </object>
       </void>
@@ -2302,7 +2279,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>65</int>
+        <int>70</int>
         <int>955</int>
        </object>
       </void>
@@ -2334,7 +2311,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>120</int>
+        <int>125</int>
         <int>955</int>
        </object>
       </void>
@@ -2362,7 +2339,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>175</int>
+        <int>180</int>
         <int>955</int>
        </object>
       </void>
@@ -2394,7 +2371,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>235</int>
+        <int>240</int>
         <int>955</int>
        </object>
       </void>
@@ -2426,7 +2403,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>15</int>
+        <int>20</int>
         <int>850</int>
        </object>
       </void>
@@ -2462,7 +2439,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>75</int>
+        <int>80</int>
         <int>850</int>
        </object>
       </void>
@@ -2498,7 +2475,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>135</int>
+        <int>140</int>
         <int>850</int>
        </object>
       </void>
@@ -2534,7 +2511,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>195</int>
+        <int>200</int>
         <int>850</int>
        </object>
       </void>
@@ -2566,7 +2543,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>260</int>
+        <int>265</int>
         <int>850</int>
        </object>
       </void>
@@ -2602,7 +2579,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>5</int>
+        <int>10</int>
         <int>956</int>
        </object>
       </void>
@@ -2642,7 +2619,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>5</int>
+        <int>10</int>
         <int>1007</int>
        </object>
       </void>
@@ -2674,7 +2651,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>65</int>
+        <int>70</int>
         <int>1005</int>
        </object>
       </void>
@@ -2706,7 +2683,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>125</int>
+        <int>130</int>
         <int>1005</int>
        </object>
       </void>
@@ -2734,7 +2711,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>185</int>
+        <int>190</int>
         <int>1005</int>
        </object>
       </void>
@@ -2762,7 +2739,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>245</int>
+        <int>250</int>
         <int>1005</int>
        </object>
       </void>
@@ -2798,7 +2775,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1058</int>
        </object>
       </void>
@@ -2830,7 +2807,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>65</int>
+        <int>70</int>
         <int>1060</int>
        </object>
       </void>
@@ -2858,7 +2835,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>140</int>
+        <int>145</int>
         <int>1055</int>
        </object>
       </void>
@@ -2886,7 +2863,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>200</int>
+        <int>205</int>
         <int>1055</int>
        </object>
       </void>
@@ -2914,7 +2891,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>260</int>
+        <int>265</int>
         <int>1055</int>
        </object>
       </void>
@@ -2942,7 +2919,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>320</int>
+        <int>325</int>
         <int>1060</int>
        </object>
       </void>
@@ -2970,7 +2947,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>390</int>
+        <int>395</int>
         <int>1060</int>
        </object>
       </void>
@@ -2998,7 +2975,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>455</int>
+        <int>460</int>
         <int>1060</int>
        </object>
       </void>
@@ -3026,7 +3003,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1112</int>
        </object>
       </void>
@@ -3054,7 +3031,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1164</int>
        </object>
       </void>
@@ -3082,7 +3059,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1218</int>
        </object>
       </void>
@@ -3110,7 +3087,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1270</int>
        </object>
       </void>
@@ -3146,7 +3123,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1322</int>
        </object>
       </void>
@@ -3182,7 +3159,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1374</int>
        </object>
       </void>
@@ -3214,7 +3191,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1426</int>
        </object>
       </void>
@@ -3250,7 +3227,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1478</int>
        </object>
       </void>
@@ -3278,7 +3255,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1530</int>
        </object>
       </void>
@@ -3306,7 +3283,7 @@ scrollPane2.setViewportView(drawingCanvas);
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <int>5</int>
         <int>1582</int>
        </object>
       </void>

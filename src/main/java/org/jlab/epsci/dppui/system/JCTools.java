@@ -793,8 +793,8 @@ public class JCTools {
                 c.getRol2(), c.getRol2UsrString(), c.getDescription(),
                 c.getUserConfig(), c.getPriority(), c.isCodaComponent(),
                 c.isStreaming(), c.isPreDefined(), c.getNodeList(),
-                c.getCommand(), c.isMaster(), c.getModule(), c.getLnks(),
-                c.getTrnsports(), c.getPrcesses(), c.getImage());
+                c.getCommand(), c.isMaster(), c.getModule(), c.getLinks(),
+                c.getTransports(), c.getProcesses(), c.getImage());
     }
 
     public static JCGLink deepCpLink(JCGLink c) {

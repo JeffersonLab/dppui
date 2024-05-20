@@ -78,7 +78,7 @@ public class JCParser {
                 File.separator + name + "#" + name, "hasProcess");
 
         if (processlist != null && !processlist.isEmpty()) {
-            duper.setPrcesses(processlist);
+            duper.setProcesses(processlist);
         }
         componentMap = parseComponent(JCGSetup.COOL_HTTP_BASE + "Control" +
                 File.separator + name + File.separator + name + "#" + name, "hasComponent");
@@ -98,7 +98,7 @@ public class JCParser {
                 File.separator + name + "#" + name, "hasProcess");
 
         if (processlist != null && !processlist.isEmpty()) {
-            duper.setPrcesses(processlist);
+            duper.setProcesses(processlist);
         }
         return duper;
     }
@@ -418,14 +418,14 @@ public class JCParser {
                 // parse processes
                 Set<JCGProcess> processes = parseProcesses(x, "hasProcess");
                 if (processes != null && !processes.isEmpty()) {
-                    cmp.setPrcesses(processes);
+                    cmp.setProcesses(processes);
                 }
 
 
                 // pares links
                 Set<JCGLink> links = parseLink(x, "usesLink");
                 if (links != null && !links.isEmpty()) {
-                    cmp.setLnks(links);
+                    cmp.setLinks(links);
                 }
 
                 tmps = getValue(x, "hasUserConfig");

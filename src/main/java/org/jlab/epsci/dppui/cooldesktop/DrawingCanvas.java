@@ -210,7 +210,7 @@ public class DrawingCanvas extends JPanel {
         for (JCGComponent com : GCMPs.values()) {
             com.setX(com.getGridX());
             com.setY(com.getGridY());
-            for (JCGLink l : com.getLnks()) {
+            for (JCGLink l : com.getLinks()) {
                 if (l.getDestinationComponentName().equals(com.getName())) {
                     l.setEndX((int) com.getGridX());
                     l.setEndY((int) com.getGridY() + (int) h / 2);
@@ -387,7 +387,7 @@ public class DrawingCanvas extends JPanel {
                         gc.setW(c.getW());
                         gc.setH(c.getH());
 
-                        for (JCGLink l : gc.getLnks()) {
+                        for (JCGLink l : gc.getLinks()) {
                             if (l.getDestinationComponentName().equals(gc.getName())) {
                                 l.setEndX(l.getEndX() + (l.getEndX() * zmv));
                                 l.setEndY(l.getEndY() + (l.getEndY() * zmv));
@@ -423,7 +423,7 @@ public class DrawingCanvas extends JPanel {
                     gc.setW(w - (w * zmv));
                     gc.setH(h - (h * zmv));
 
-                    for (JCGLink l : gc.getLnks()) {
+                    for (JCGLink l : gc.getLinks()) {
                         if (l.getDestinationComponentName().equals(gc.getName())) {
                             l.setEndX(l.getEndX() - (l.getEndX() * zmv));
                             l.setEndY(l.getEndY() - (l.getEndY() * zmv));
@@ -455,7 +455,7 @@ public class DrawingCanvas extends JPanel {
                         gc.setW(c.getW());
                         gc.setH(c.getH());
 
-                        for (JCGLink l : gc.getLnks()) {
+                        for (JCGLink l : gc.getLinks()) {
                             if (l.getDestinationComponentName().equals(gc.getName())) {
                                 l.setEndX(l.getEndX() + (l.getEndX() * zmv));
                                 l.setEndY(l.getEndY() + (l.getEndY() * zmv));
@@ -491,7 +491,7 @@ public class DrawingCanvas extends JPanel {
                     gc.setW(w + (w * zmv));
                     gc.setH(h + (h * zmv));
 
-                    for (JCGLink l : gc.getLnks()) {
+                    for (JCGLink l : gc.getLinks()) {
                         if (l.getDestinationComponentName().equals(gc.getName())) {
                             l.setEndX(l.getEndX() + (l.getEndX() * zmv));
                             l.setEndY(l.getEndY() + (l.getEndY() * zmv));
@@ -655,7 +655,7 @@ public class DrawingCanvas extends JPanel {
                 !GCMPs.isEmpty()) {
 
             JCGLink gle = null;
-            for (JCGLink l : GCMPs.get(lineEndGc).getLnks()) {
+            for (JCGLink l : GCMPs.get(lineEndGc).getLinks()) {
                 if (l.getDestinationComponentName().equals(lineEndGc) && l.getSourceComponentName().equals(lineStartGc)) {
                     gle = l;
                     break;
@@ -790,7 +790,7 @@ public class DrawingCanvas extends JPanel {
         drawGComponent(gc.getName(), gc.getX(), gc.getY(), gc.getW(), gc.getH());
 
 
-        for (JCGLink l : gc.getLnks()) {
+        for (JCGLink l : gc.getLinks()) {
             double sx = 0.0;
             double sy = 0.0;
             double ex = 0.0;
@@ -834,34 +834,34 @@ public class DrawingCanvas extends JPanel {
 
     private void _deleteComponent(JCGComponent c) {
         // recycle deleted component id
-        for (JCGLink l : c.getLnks()) {
+        for (JCGLink l : c.getLinks()) {
             if (l.getSourceComponentName().equals(c.getName())) {
 
                 JCGComponent dc = GCMPs.get(l.getDestinationComponentName());
                 ArrayList<JCGLink> removedLinks = new ArrayList<JCGLink>();
 
-                for (JCGLink dl : dc.getLnks()) {
+                for (JCGLink dl : dc.getLinks()) {
                     if (dl.getSourceComponentName().equals(c.getName()) ||
                             dl.getDestinationComponentName().equals(c.getName())) {
                         removedLinks.add(dl);
                     }
                 }
                 for (JCGLink rl : removedLinks) {
-                    dc.removeLnk(rl);
+                    dc.removeLink(rl);
                 }
                 GCMPs.put(dc.getName(), dc);
             }
             if (l.getDestinationComponentName().equals(c.getName())) {
                 JCGComponent dc = GCMPs.get(l.getSourceComponentName());
                 ArrayList<JCGLink> removedLinks = new ArrayList<JCGLink>();
-                for (JCGLink dl : dc.getLnks()) {
+                for (JCGLink dl : dc.getLinks()) {
                     if (dl.getSourceComponentName().equals(c.getName()) ||
                             dl.getDestinationComponentName().equals(c.getName())) {
                         removedLinks.add(dl);
                     }
                 }
                 for (JCGLink rl : removedLinks) {
-                    dc.removeLnk(rl);
+                    dc.removeLink(rl);
                 }
                 GCMPs.put(dc.getName(), dc);
             }
@@ -875,7 +875,7 @@ public class DrawingCanvas extends JPanel {
                 g2D.setColor(g2D.getBackground());
                 g2D.fill(new Rectangle.Double(c.getX() - 1, c.getY() - 1, c.getW() + 2, c.getH() + 2));
                 g2D.setColor(Color.black);
-                c.removeLnks();
+                c.removeLinks();
             }
             GCMPs.remove(c.getName());
         }
@@ -889,7 +889,7 @@ public class DrawingCanvas extends JPanel {
 
             ArrayList<JCGLink> removedLinks = new ArrayList<JCGLink>();
 
-            for (JCGLink l : c.getLnks()) {
+            for (JCGLink l : c.getLinks()) {
                 if (l.getSourceComponentName().equals(selectedGCmpName)) {
                     removedLinks.add(l);
                     if (!l.getDestinationComponentName().equals("")) {
@@ -898,7 +898,7 @@ public class DrawingCanvas extends JPanel {
                 }
             }
             for (JCGLink rl : removedLinks) {
-                c.removeLnk(rl);
+                c.removeLink(rl);
             }
 
         }
@@ -906,9 +906,9 @@ public class DrawingCanvas extends JPanel {
             for (JCGLink l : dl) {
                 JCGComponent dcom = GCMPs.get(l.getDestinationComponentName());
                 if (dcom != null) {
-                    for (JCGLink ddl : dcom.getLnks()) {
+                    for (JCGLink ddl : dcom.getLinks()) {
                         if (ddl.getName().equals(l.getName())) {
-                            dcom.removeLnk(ddl);
+                            dcom.removeLink(ddl);
                             break;
                         }
                     }
@@ -921,7 +921,7 @@ public class DrawingCanvas extends JPanel {
     private void lkd(JCGComponent c, String lName) {
         String destCompLink = "undefined";
         JCGLink rl = null;
-        for (JCGLink l : c.getLnks()) {
+        for (JCGLink l : c.getLinks()) {
             if (l.getName().equals(lName)) {
                 destCompLink = l.getName();
                 rl = l;
@@ -929,21 +929,21 @@ public class DrawingCanvas extends JPanel {
             }
         }
         if (rl != null) {
-            c.removeLnk(rl);
+            c.removeLink(rl);
         }
 
         rl = null;
         if (!destCompLink.equals("undefined")) {
             JCGComponent dcom = GCMPs.get(destCompLink);
             if (dcom != null) {
-                for (JCGLink dl : dcom.getLnks()) {
+                for (JCGLink dl : dcom.getLinks()) {
                     if (dl.getName().equals(destCompLink)) {
                         rl = dl;
                         break;
                     }
                 }
                 if (rl != null) {
-                    dcom.removeLnk(rl);
+                    dcom.removeLink(rl);
                 }
             }
         }
@@ -963,11 +963,11 @@ public class DrawingCanvas extends JPanel {
             ArrayList<JCGTransport> transports2remove = new ArrayList<JCGTransport>();
             ArrayList<String> componentLinks2remove = new ArrayList<String>();
 
-            for (JCGLink l : c.getLnks()) {
+            for (JCGLink l : c.getLinks()) {
                 if (l.getName().contains(compName)) {
                     links2remove.add(l);
                     JCGComponent dcom = GCMPs.get(l.getDestinationComponentName());
-                    for (JCGLink dl : dcom.getLnks()) {
+                    for (JCGLink dl : dcom.getLinks()) {
                         if (dl.getName().contains(l.getName())) {
                             componentLinks2remove.add(dl.getName());
                             break;
@@ -979,16 +979,16 @@ public class DrawingCanvas extends JPanel {
             for (String ll : componentLinks2remove) {
                 linkDelete(ll);
             }
-            for (JCGTransport t : c.getTrnsports()) {
+            for (JCGTransport t : c.getTransports()) {
                 if (t.getName().contains(compName)) {
                     transports2remove.add(t);
                 }
             }
             for (JCGLink l : links2remove) {
-                c.removeLnk(l);
+                c.removeLink(l);
             }
             for (JCGTransport t : transports2remove) {
-                c.removeTrnsport(t);
+                c.removeTransport(t);
             }
         }
 
@@ -997,7 +997,7 @@ public class DrawingCanvas extends JPanel {
 
     public String[] getLinkNames() {
         ArrayList<String> al = new ArrayList<String>();
-        for (JCGLink l : GCMPs.get(selectedGCmpName).getLnks()) {
+        for (JCGLink l : GCMPs.get(selectedGCmpName).getLinks()) {
             if (l.getSourceComponentName().equals(selectedGCmpName)) {
                 al.add(l.getName());
             }
@@ -1012,7 +1012,7 @@ public class DrawingCanvas extends JPanel {
     public int getLinkCount() {
         int lc = 0;
         if (!selectedGCmpName.equals("undefined")) {
-            for (JCGLink l : GCMPs.get(selectedGCmpName).getLnks()) {
+            for (JCGLink l : GCMPs.get(selectedGCmpName).getLinks()) {
                 if (l.getSourceComponentName().equals(selectedGCmpName)) {
                     lc++;
                 }
@@ -1076,11 +1076,11 @@ public class DrawingCanvas extends JPanel {
                 if (isMovable) {
                     JCGComponent gc = defineGCmp();
                     if (gc != null) {
-                        if (gc.getLnks().isEmpty()) {
+                        if (gc.getLinks().isEmpty()) {
                             destinationNetworkInfo.add("To");
                             destinationNetworkInfo.add("None");
                         } else {
-                            for (JCGLink l : gc.getLnks()) {
+                            for (JCGLink l : gc.getLinks()) {
                                 if (l.getSourceComponentName().equals(gc.getName())) {
                                     if (!destinationNetworkInfo.contains("To")) {
                                         destinationNetworkInfo.add("To");
@@ -1089,7 +1089,7 @@ public class DrawingCanvas extends JPanel {
                                     }
 //todo show more information about the transport
                                     if (GCMPs.containsKey(l.getDestinationComponentName())) {
-                                        for (JCGTransport tr : GCMPs.get(l.getDestinationComponentName()).getTrnsports()) {
+                                        for (JCGTransport tr : GCMPs.get(l.getDestinationComponentName()).getTransports()) {
                                             if (tr.getName().equals(l.getDestinationTransportName())) {
                                                 destinationNetworkInfo.add(tr.getTransClass());
                                                 if (tr.getTransClass().equals("Et") ||
@@ -1111,7 +1111,7 @@ public class DrawingCanvas extends JPanel {
 //todo show more information about the transport
                                     boolean noSourceTransport = true;
                                     if (GCMPs.containsKey(l.getSourceComponentName())) {
-                                        for (JCGTransport tr : GCMPs.get(l.getSourceComponentName()).getTrnsports()) {
+                                        for (JCGTransport tr : GCMPs.get(l.getSourceComponentName()).getTransports()) {
                                             if (tr.getName().equals(l.getSourceTransportName())) {
                                                 sourceNetworkInfo.add(l.getSourceComponentName());
                                                 noSourceTransport = false;
@@ -1161,7 +1161,7 @@ public class DrawingCanvas extends JPanel {
                     if (gc != null) {
                         if (gc.getType().equals(ACodaType.SINK.name())) {
                             JCGLink gle = null;
-                            for (JCGLink l : GCMPs.get(gc.getName()).getLnks()) {
+                            for (JCGLink l : GCMPs.get(gc.getName()).getLinks()) {
                                 if (l.getDestinationComponentName().equals(gc.getName())) {
                                     gle = l;
                                     break;
@@ -1223,7 +1223,7 @@ public class DrawingCanvas extends JPanel {
                         _unZoomGCMPs.get(selectedGCmpName).setX(_x);
                         _unZoomGCMPs.get(selectedGCmpName).setY(_y);
 
-                        for (JCGLink l : GCMPs.get(selectedGCmpName).getLnks()) {
+                        for (JCGLink l : GCMPs.get(selectedGCmpName).getLinks()) {
                             if (l.getDestinationComponentName().equals(selectedGCmpName)) {
                                 l.setEndX((int) _x);
                                 l.setEndY((int) _y + (int) h / 2);
@@ -1241,7 +1241,7 @@ public class DrawingCanvas extends JPanel {
                         _unZoomGCMPs.get(selectedGCmpName).setX(_x);
                         _unZoomGCMPs.get(selectedGCmpName).setY(_y);
 
-                        for (JCGLink l : GCMPs.get(selectedGCmpName).getLnks()) {
+                        for (JCGLink l : GCMPs.get(selectedGCmpName).getLinks()) {
                             if (l.getDestinationComponentName().equals(selectedGCmpName)) {
                                 l.setEndX((int) x);
                                 l.setEndY((int) y + (int) h / 2);

@@ -125,8 +125,8 @@ public class SOutputForm extends JFrame {
     private void update() {
         JCGTransport gt=null;
         String tName = component.getName() + "_transport";
-        if(component.getTrnsports()!=null){
-            if(component.getTrnsports().isEmpty()){
+        if(component.getTransports()!=null){
+            if(component.getTransports().isEmpty()){
 
                 gt = new JCGTransport();
                 gt.setName(tName);
@@ -137,7 +137,7 @@ public class SOutputForm extends JFrame {
                 }
             }
             else {
-                for(JCGTransport tt:component.getTrnsports()){
+                for(JCGTransport tt:component.getTransports()){
                     gt = tt;
                     gt.setName(tName);
 //                    if(tt.getNameFromTextField().equals(tName)){
@@ -821,8 +821,8 @@ public class SOutputForm extends JFrame {
 
                 // remove component
                 canvas.removeCmp(component);
-                component.removeTrnsports();
-                component.removeLnks();
+                component.removeTransports();
+                component.removeLinks();
 
                 // update a component
                 component.setName(nameTextField.getText().trim());
@@ -861,7 +861,7 @@ public class SOutputForm extends JFrame {
                 // add transport
                 // remove the old transport if exists
 //                component.removeTrnsport(gt);
-                component.addTrnsport(gt);
+                component.addTransport(gt);
 
                 // add component to tht map
                 canvas.addgCmp(component);
@@ -870,7 +870,7 @@ public class SOutputForm extends JFrame {
 
                     // remove and add links
                     if(canvas.getGCMPs().containsKey(glob.getSourceComponentName())){
-                    canvas.getGCMPs().get(glob.getSourceComponentName()).removeLnk(glob);
+                    canvas.getGCMPs().get(glob.getSourceComponentName()).removeLink(glob);
                     } else {
                         System.out.println("Error: malformed configuration. SourceComponent of the link is not defined.");
                     }
@@ -885,11 +885,11 @@ public class SOutputForm extends JFrame {
 //                    canvas.getGCMPs().get(glob.getSourceComponentName()).removeTrnsport(gt);
 //                    canvas.getGCMPs().get(glob.getDestinationComponentName()).removeTrnsport(gt);
 
-                    canvas.getGCMPs().get(glob.getDestinationComponentName()).addTrnsport(gt);
-                    canvas.getGCMPs().get(glob.getSourceComponentName()).addTrnsport(gt);
+                    canvas.getGCMPs().get(glob.getDestinationComponentName()).addTransport(gt);
+                    canvas.getGCMPs().get(glob.getSourceComponentName()).addTransport(gt);
 
-                    canvas.getGCMPs().get(glob.getSourceComponentName()).addLnk(glob);
-                    canvas.getGCMPs().get(glob.getDestinationComponentName()).addLnk(glob);
+                    canvas.getGCMPs().get(glob.getSourceComponentName()).addLink(glob);
+                    canvas.getGCMPs().get(glob.getDestinationComponentName()).addLink(glob);
                 }
 
                 canvas.repaint();

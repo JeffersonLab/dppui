@@ -32,7 +32,6 @@ import org.jlab.epsci.dppui.util.JCUtil;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -57,25 +56,26 @@ public class SNLinkForm extends JFrame {
         if (gl.getDestinationComponentType().equals(ACodaType.SINK.name())) {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "File",
-                    "Et",
+                    "ET",
                     "Debug",
                     "None"
             });
-        } else if (gl.getDestinationComponentType().equals(ACodaType.EBER.name()))   {
+        } else if (gl.getDestinationComponentType().equals(ACodaType.EBER.name()) ||
+                gl.getDestinationComponentType().equals(ACodaType.ER.name()) )   {
             comboModel = new DefaultComboBoxModel(new String[]{
-                    "EmuSocket+Et",
+                    "EmuSocket+ET",
                     "EmuSocket",
                     "None"
             });
         } else if (gl.getDestinationComponentType().equals(ACodaType.PEB.name())) {
             comboModel = new DefaultComboBoxModel(new String[]{
-                    "Et",
+                    "ET",
                     "EmuSocket",
                     "None"
             });
         } else if (gl.getDestinationComponentType().equals(ACodaType.DC.name())) {
             comboModel = new DefaultComboBoxModel(new String[]{
-                    "Et",
+                    "ET",
                     "EmuSocket",
                     "None"
             });
@@ -91,12 +91,43 @@ public class SNLinkForm extends JFrame {
                     "UdpStream",
                     "None"
             });
+        } else if (gl.getDestinationComponentType().equals(ACodaType.ET.name())
+        ) {
+            comboModel = new DefaultComboBoxModel(new String[]{
+                    "ET"
+            });
+        } else if (gl.getDestinationComponentType().equals(ACodaType.ACTOR.name()) ||
+                gl.getDestinationComponentType().equals(ACodaType.HISTOGRAP_SINK.name()) ||
+                gl.getDestinationComponentType().equals(ACodaType.DEVNULL_SINK.name())
+        ) {
+            comboModel = new DefaultComboBoxModel(new String[]{
+                    "ERSAP Transient"
+            });
+        } else if (gl.getDestinationComponentType().equals(ACodaType.LOAD_BALANCER.name()) ||
+                gl.getDestinationComponentType().equals(ACodaType.REASSEMBLY.name())
+        ) {
+            comboModel = new DefaultComboBoxModel(new String[]{
+                    "EJFAT Transport"
+            });
+        } else if (gl.getDestinationComponentType().equals(ACodaType.APPLICATION.name()) ||
+                gl.getDestinationComponentType().equals(ACodaType.SHELL_PROCESS.name()) ||
+                gl.getDestinationComponentType().equals(ACodaType.DOCKER_CONTAINER.name())
+        ) {
+            comboModel = new DefaultComboBoxModel(new String[]{
+                    "SSH"
+            });
         } else {
             comboModel = new DefaultComboBoxModel(new String[]{
-                    "Et",
+                    "ET",
                     "EmuSocket",
+                    "EmuSocket+ET",
                     "TcpStream",
                     "UdpStream",
+                    "ERSAP Transient",
+                    "EJFAT Transport",
+                    "SSH",
+                    "File",
+                    "Debug",
                     "None"
             });
         }
@@ -104,7 +135,6 @@ public class SNLinkForm extends JFrame {
         initComponents();
         update();
         if (!editable) {
-
             disableEmu();
             disableEt();
             disableUdp();
@@ -153,11 +183,11 @@ public class SNLinkForm extends JFrame {
         JCGComponent destinationComponent = canvas.getGCMPs().get(DName);
 
         // get destination component transport
-        if (destinationComponent.getTrnsports() != null &&
-                !destinationComponent.getTrnsports().isEmpty()) {
+        if (destinationComponent.getTransports() != null &&
+                !destinationComponent.getTransports().isEmpty()) {
 
             // destination transport
-            for (JCGTransport tr : destinationComponent.getTrnsports()) {
+            for (JCGTransport tr : destinationComponent.getTransports()) {
                 if (tr.getName().equals(DtName)) {
                     destinationTransport = tr;
                     break;
@@ -173,7 +203,7 @@ public class SNLinkForm extends JFrame {
             }
 
             // source transport
-            for (JCGTransport tr : sourceComponent.getTrnsports()) {
+            for (JCGTransport tr : sourceComponent.getTransports()) {
                 if (tr.getName().equals(StName)) {
                     sourceTransport = tr;
                     break;
@@ -186,7 +216,7 @@ public class SNLinkForm extends JFrame {
             sourceTransport = new JCGTransport();
             sourceTransport.setName(StName);
             sourceTransport.setNoLink(false);
-            sourceComponent.addTrnsport(sourceTransport);
+            sourceComponent.addTransport(sourceTransport);
         }
 
         // define a default transport for the destination component if it is not defined
@@ -440,7 +470,7 @@ public class SNLinkForm extends JFrame {
 
     public void checkTrClass() {
         // control access to the form
-        if (transportClassComboBox.getSelectedItem().equals("Et")) {
+        if (transportClassComboBox.getSelectedItem().equals("ET")) {
             enableEt();
 
             disableEmu();
@@ -607,7 +637,7 @@ public class SNLinkForm extends JFrame {
         //======== this ========
         setTitle("Link");
         setAutoRequestFocus(false);
-        Container contentPane = getContentPane();
+        var contentPane = getContentPane();
 
         //======== menuBar2 ========
         {
@@ -1044,7 +1074,7 @@ public class SNLinkForm extends JFrame {
                                 .addComponent(emuFatPipeCheckBox)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(label18)))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(panel4Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                             .addGroup(panel4Layout.createSequentialGroup()
                                 .addComponent(fpgaLinkIpTextField, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
@@ -1143,7 +1173,7 @@ public class SNLinkForm extends JFrame {
                                 .addComponent(label15)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(UdpFpgaLinkIp, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                                 .addComponent(label16)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(UdpStreamsSpinner, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
@@ -1151,7 +1181,7 @@ public class SNLinkForm extends JFrame {
                             .addGroup(panel5Layout.createSequentialGroup()
                                 .addComponent(label11)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(UdpHostTextField, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                .addComponent(UdpHostTextField, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(label12)
                                 .addGap(41, 41, 41)
@@ -1238,7 +1268,7 @@ public class SNLinkForm extends JFrame {
                                 .addComponent(etTcpPortLabel3)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tcpStreamPortSpinner, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                                 .addComponent(label8))
                             .addGroup(panel6Layout.createSequentialGroup()
                                 .addComponent(label24)
@@ -1291,7 +1321,6 @@ public class SNLinkForm extends JFrame {
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                             .addGap(0, 0, Short.MAX_VALUE)
                             .addComponent(okButton)
@@ -1301,9 +1330,10 @@ public class SNLinkForm extends JFrame {
                             .addComponent(clearButton)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(cancelButton))
-                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panel2, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panel4, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel6, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panel6, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panel5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap())
@@ -1312,18 +1342,18 @@ public class SNLinkForm extends JFrame {
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(cancelButton)
                         .addComponent(clearButton)
@@ -1500,15 +1530,15 @@ public class SNLinkForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             JCGComponent s = canvas.getGCMPs().get(link.getSourceComponentName());
             JCGComponent d = canvas.getGCMPs().get(link.getDestinationComponentName());
-            for (JCGLink l : s.getLnks()) {
+            for (JCGLink l : s.getLinks()) {
                 if (l.getName().equals(link.getName())) {
-                    s.removeLnk(l);
+                    s.removeLink(l);
                     break;
                 }
             }
-            for (JCGLink ll : d.getLnks()) {
+            for (JCGLink ll : d.getLinks()) {
                 if (ll.getName().equals(link.getName())) {
-                    d.removeLnk(ll);
+                    d.removeLink(ll);
                     break;
                 }
             }
@@ -1603,11 +1633,11 @@ public class SNLinkForm extends JFrame {
             }
 
             // add transports to the destination component
-            canvas.getGCMPs().get(link.getDestinationComponentName()).addTrnsport(destinationTransport);
+            canvas.getGCMPs().get(link.getDestinationComponentName()).addTransport(destinationTransport);
 
             // add links
-            canvas.getGCMPs().get(link.getSourceComponentName()).addLnk(link);
-            canvas.getGCMPs().get(link.getDestinationComponentName()).addLnk(link);
+            canvas.getGCMPs().get(link.getSourceComponentName()).addLink(link);
+            canvas.getGCMPs().get(link.getDestinationComponentName()).addLink(link);
 
             if (transportClassComboBox.getSelectedItem().equals("UdpStream") ||
                     transportClassComboBox.getSelectedItem().equals("TcpStream")) {

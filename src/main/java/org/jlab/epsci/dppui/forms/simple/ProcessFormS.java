@@ -791,12 +791,12 @@ public class ProcessFormS extends JFrame {
 
                 // add process to the component
                 if(sCompForm!=null){
-                    canvas.getGCMPs().get(sCompForm.getNameFromTextField()).addPrcess(gp);
+                    canvas.getGCMPs().get(sCompForm.getNameFromTextField()).addProcess(gp);
 
                     // add process name to the combo box of the component form
                     sCompForm.addProcessCombo(gp.getName());
                 }  else if(sForm!=null){
-                    canvas.getSupervisor().addPrcess(gp);
+                    canvas.getSupervisor().addProcess(gp);
                     sForm.addProcessCombo(gp.getName());
                 }
                 dispose();
@@ -872,14 +872,14 @@ public class ProcessFormS extends JFrame {
 
             // remove process from the component
             if(sCompForm!=null){
-                canvas.getGCMPs().get(sCompForm.getNameFromTextField()).removePrcess((gp));
+                canvas.getGCMPs().get(sCompForm.getNameFromTextField()).removeProcess((gp));
 
                 // remove process name from the combo box of the component form
                 sCompForm.removeProcessCombo(gp.getName());
 
             // Supervisor
             } else if(sForm!=null && spv!=null){
-                spv.removePrcess(gp);
+                spv.removeProcess(gp);
 
                 // remove process name from the combo box of the component form
                 sForm.removeProcessCombo(gp.getName());

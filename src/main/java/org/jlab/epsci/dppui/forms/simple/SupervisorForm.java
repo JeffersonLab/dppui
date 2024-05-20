@@ -51,7 +51,7 @@ public class SupervisorForm extends JFrame {
         parentCanvas = canvas;
         initComponents();
         // recreate processes combo box
-        for(JCGProcess pr:superv.getPrcesses()){
+        for(JCGProcess pr:superv.getProcesses()){
             processID++;
             addProcessCombo(pr.getName());
         }
@@ -289,7 +289,7 @@ public class SupervisorForm extends JFrame {
             } else {
 
                 // open existing process in the form
-                for(JCGProcess gp:superv.getPrcesses()){
+                for(JCGProcess gp:superv.getProcesses()){
                     if((processComboBox.getSelectedItem()).equals(gp.getName())){
 
                         // start a process form

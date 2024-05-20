@@ -34,7 +34,6 @@ import org.jlab.epsci.dppui.util.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.dnd.DnDConstants;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
@@ -220,7 +219,7 @@ public class CDesktopNew extends JFrame {
         Set<Integer> _ports = new HashSet<>();
         Map<String,JCGTransport> _transports = new HashMap<>();
         for(JCGComponent c: drawingCanvas.getGCMPs().values()) {
-            for(JCGTransport t: c.getTrnsports()) {
+            for(JCGTransport t: c.getTransports()) {
                 _transports.put(c.getName(), t);
             }
         }
@@ -320,157 +319,6 @@ public class CDesktopNew extends JFrame {
         drawingCanvas.unZoom();
     }
 
-    private void customCreateRegisteredComponentList(){
-        // registered component name list
-        listModel = new DefaultListModel();
-        componentNameList = new JList(listModel);
-        componentNameList.setCellRenderer(new CListCellRenderer());
-
-        // add mouse listener
-        MouseListener mouseListener = new MouseAdapter() {
-            public void mouseClicked(MouseEvent mouseEvent) {
-                Object o;
-                String s,n;
-                JList theList = (JList) mouseEvent.getSource();
-                if (mouseEvent.getClickCount() == 1) {
-                    int index = theList.locationToIndex(mouseEvent.getPoint());
-                    if (index >= 0) {
-                        o = theList.getModel().getElementAt(index);
-                        s = (String)o;
-                        n = s.substring(0,s.lastIndexOf(":")).trim();
-                        drawingCanvas.setSelectedGCmpName(n);
-                    }
-                } else if (mouseEvent.getClickCount() == 2) {
-                    int index = theList.locationToIndex(mouseEvent.getPoint());
-                    if (index >= 0) {
-                        o = theList.getModel().getElementAt(index);
-                        s = (String)o;
-                        n = s.substring(0,s.lastIndexOf(":")).trim();
-
-//                        new RefactorForm(me,n,selectedType).setVisible(true);
-                    }
-                } else if(mouseEvent.isMetaDown()){
-                    int index = theList.locationToIndex(mouseEvent.getPoint());
-                    if (index >= 0) {
-                        o = theList.getModel().getElementAt(index);
-                        s = (String)o;
-                        n = s.substring(0,s.lastIndexOf(":")).trim();
-                        int i = JCTools.popConfirmationDialog("delete component = "+n,
-                                "", true);
-                        if(i==0){
-                            listModel.remove(index);
-                            removeDescribedComponent(n);
-                        }
-                    }
-                }
-            }
-        };
-        componentNameList.addMouseListener(mouseListener);
-        // make registered component list draggable
-        new CListDragSource(componentNameList, DnDConstants.ACTION_COPY_OR_MOVE);
-
-    }
-
-//    private void customCreateComponentLabelList(){
-//        // component label list
-//        //Load the pet images and create an array of indexes.
-//        images = new ImageIcon[componentStrings.length];
-//        Integer[] intArray = new Integer[componentStrings.length];
-//        for (int i = 0; i < componentStrings.length; i++) {
-//            intArray[i] = i;
-//            images[i] = new ImageIcon(getClass().getResource(File.separator+"resources"+File.separator+componentStrings[i]+".png"));
-//            if (images[i] != null) {
-//                images[i].setDescription(componentStrings[i]);
-//            }
-//        }
-//        //Create the list.
-//        componentLabelList = new JList(intArray);
-//        CListRenderer renderer= new CListRenderer(images, componentStrings);
-//        renderer.setPreferredSize(new Dimension(100, 60));
-//        componentLabelList.setCellRenderer(renderer);
-//        // add mouse listener
-//        MouseListener mouseListener = new MouseAdapter() {
-//            public void mouseClicked(MouseEvent mouseEvent) {
-//                JList theList = (JList) mouseEvent.getSource();
-//                if (mouseEvent.getClickCount() == 1) {
-//                    int index = theList.locationToIndex(mouseEvent.getPoint());
-//                    if (index >= 0) {
-//                        Object o = theList.getModel().getElementAt(index);
-//                        if(o instanceof Integer){
-//                            Integer selectedTypeIndex = (Integer)o;
-//                            switch(selectedTypeIndex) {
-//                                case 0:
-//                                    cbt(ACodaType.FPGA.name());
-//                                    selectedType = ACodaType.FPGA.name();
-//                                    break;
-//                                case 1:
-//                                    cbt(ACodaType.TS.name());
-//                                    selectedType = ACodaType.TS.name();
-//                                    break;
-//                                case 2:
-//                                    cbt(ACodaType.GT.name());
-//                                    selectedType = ACodaType.GT.name();
-//                                    break;
-//                                case 3:
-//                                    cbt(ACodaType.ROC.name());
-//                                    selectedType = ACodaType.ROC.name();
-//                                    break;
-//                                case 4:
-//                                    cbt(ACodaType.DC.name());
-//                                    selectedType = ACodaType.DC.name();
-//                                    break;
-//                                case 5:
-//                                    cbt(ACodaType.PEB.name());
-//                                    selectedType = ACodaType.PEB.name();
-//                                    break;
-//                                case 6:
-//                                    cbt(ACodaType.PAGG.name());
-//                                    selectedType = ACodaType.PAGG.name();
-//                                    break;
-//                                case 7:
-//                                    cbt(ACodaType.SEB.name());
-//                                    selectedType = ACodaType.SEB.name();
-//                                    break;
-//                                case 8:
-//                                    cbt(ACodaType.SAGG.name());
-//                                    selectedType = ACodaType.SAGG.name();
-//                                    break;
-//                                case 9:
-//                                    cbt(ACodaType.EBER.name());
-//                                    selectedType = ACodaType.EBER.name();
-//                                    break;
-//                                case 10:
-//                                    cbt(ACodaType.ER.name());
-//                                    selectedType = ACodaType.ER.name();
-//                                    break;
-//                                case 11:
-//                                    cbt(ACodaType.SLC.name());
-//                                    selectedType = ACodaType.SLC.name();
-//                                    break;
-//                                case 12:
-//                                    cbt(ACodaType.USR.name());
-//                                    selectedType = ACodaType.USR.name();
-//                                    break;
-//                                case 13:
-//                                    cbt(ACodaType.FILE.name());
-//                                    selectedType = ACodaType.FILE.name();
-//                                    break;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        };
-//        componentLabelList.addMouseListener(mouseListener);
-//
-//        // make  component label list draggable
-//        new CListDragSource(componentLabelList, DnDConstants.ACTION_COPY_OR_MOVE);
-//    }
-    private void createUIComponents() {
-        customCreateRegisteredComponentList();
-//        customCreateComponentLabelList();
-    }
-
     private void configNameLabelMouseClicked(MouseEvent e) {
         if(!configNameLabel.getText().equals("") && !configNameLabel.getText().equals("undefined")){
             if(drawingCanvas.getSupervisor()==null){
@@ -513,38 +361,21 @@ public class CDesktopNew extends JFrame {
 
     private void ErmiMousePressed(MouseEvent e) {
         JLabel label = new JLabel(Ermi.getText(), Ermi.getIcon(), JLabel.CENTER);
-
-        // Specify the location and size of the label
-        int x = 700;
-        int y = 100;
-        label.setBounds(x, y, 200, 50);
         cnvs.addComponent(label);
     }
 
     private void EbermiMousePressed(MouseEvent e) {
         JLabel label = new JLabel(Ebermi.getText(), Ebermi.getIcon(), JLabel.CENTER);
-
-        // Specify the location and size of the label
-        int x = 800;
-        int y = 100;
-        label.setBounds(x, y, 200, 50);
         cnvs.addComponent(label);
     }
 
     private void OutmiMousePressed(MouseEvent e) {
         JLabel label = new JLabel(Outmi.getText(), Outmi.getIcon(), JLabel.CENTER);
-
-        // Specify the location and size of the label
-        int x = 900;
-        int y = 100;
-        label.setBounds(x, y, 200, 50);
         cnvs.addComponent(label);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        createUIComponents();
-
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
         menuItem15 = new JMenuItem();
@@ -594,11 +425,6 @@ public class CDesktopNew extends JFrame {
         expidLabel = new JLabel();
         panel3 = new JPanel();
         configNameLabel = new JLabel();
-        scrollPane1 = new JScrollPane();
-        toolBar1 = new JToolBar();
-        linkModeCheckBox = new JCheckBox();
-        afecsHomeLabel = new JLabel();
-        groupModeCheckBox = new JCheckBox();
         CompPanel = new JPanel();
         menuBar2 = new JMenuBar();
         DaqMenu = new JMenu();
@@ -616,11 +442,13 @@ public class CDesktopNew extends JFrame {
         Vtpmi = new JMenuItem();
         Paggmi = new JMenuItem();
         Saggmi = new JMenuItem();
+        menuItem38 = new JMenuItem();
         ErsapMenu = new JMenu();
         FileSourcemi = new JMenuItem();
         etSourceMi = new JMenuItem();
         actorMi = new JMenuItem();
         histoActorMI = new JMenuItem();
+        menuItem37 = new JMenuItem();
         EjfatMenu = new JMenu();
         menuItem30 = new JMenuItem();
         menuItem33 = new JMenuItem();
@@ -629,6 +457,8 @@ public class CDesktopNew extends JFrame {
         Scmi = new JMenuItem();
         menuItem35 = new JMenuItem();
         menuItem36 = new JMenuItem();
+        linkModeCheckBox = new JCheckBox();
+        groupModeCheckBox = new JCheckBox();
         action1 = new ExitAction();
         action2 = new GridOnAction();
         action3 = new GridOffAction();
@@ -940,13 +770,13 @@ public class CDesktopNew extends JFrame {
                 panel2Layout.createParallelGroup()
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(expidLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(expidLabel, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                         .addContainerGap())
             );
             panel2Layout.setVerticalGroup(
                 panel2Layout.createParallelGroup()
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addComponent(expidLabel, GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
+                        .addComponent(expidLabel, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())
             );
         }
@@ -971,42 +801,13 @@ public class CDesktopNew extends JFrame {
             panel3Layout.setHorizontalGroup(
                 panel3Layout.createParallelGroup()
                     .addGroup(panel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(configNameLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(configNameLabel, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE))
             );
             panel3Layout.setVerticalGroup(
                 panel3Layout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                        .addComponent(configNameLabel, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(106, 106, 106))
+                    .addComponent(configNameLabel, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
             );
-        }
-
-        //======== scrollPane1 ========
-        {
-            scrollPane1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
-                new Font("Bitstream Charter", Font.PLAIN, 11), new Color(0x006666)));
-            scrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-            //---- componentNameList ----
-            componentNameList.setForeground(new Color(0x663300));
-            scrollPane1.setViewportView(componentNameList);
-        }
-
-        //======== toolBar1 ========
-        {
-
-            //---- linkModeCheckBox ----
-            linkModeCheckBox.setAction(action11);
-            linkModeCheckBox.setForeground(new Color(0x006666));
-            toolBar1.add(linkModeCheckBox);
-            toolBar1.add(afecsHomeLabel);
-
-            //---- groupModeCheckBox ----
-            groupModeCheckBox.setForeground(new Color(0x006666));
-            groupModeCheckBox.setAction(action39);
-            toolBar1.add(groupModeCheckBox);
         }
 
         //======== CompPanel ========
@@ -1154,6 +955,12 @@ public class CDesktopNew extends JFrame {
                         Saggmi.setText("SAGG");
                         Saggmi.setIcon(new ImageIcon(getClass().getResource("/SAGG.png")));
                         StrMenu.add(Saggmi);
+                        StrMenu.addSeparator();
+
+                        //---- menuItem38 ----
+                        menuItem38.setText("ET");
+                        menuItem38.setIcon(new ImageIcon(getClass().getResource("/ET.png")));
+                        StrMenu.add(menuItem38);
                     }
                     DaqMenu.add(StrMenu);
                 }
@@ -1182,9 +989,15 @@ public class CDesktopNew extends JFrame {
                     ErsapMenu.addSeparator();
 
                     //---- histoActorMI ----
-                    histoActorMI.setText("Histogram Actor");
+                    histoActorMI.setText("Histogram Sink");
                     histoActorMI.setIcon(new ImageIcon(getClass().getResource("/SINK_histogram.png")));
                     ErsapMenu.add(histoActorMI);
+                    ErsapMenu.addSeparator();
+
+                    //---- menuItem37 ----
+                    menuItem37.setText("DevNull Sink");
+                    menuItem37.setIcon(new ImageIcon(getClass().getResource("/DevNullSink.png")));
+                    ErsapMenu.add(menuItem37);
                 }
                 menuBar2.add(ErsapMenu);
 
@@ -1250,45 +1063,52 @@ public class CDesktopNew extends JFrame {
             );
         }
 
+        //---- linkModeCheckBox ----
+        linkModeCheckBox.setAction(action11);
+        linkModeCheckBox.setForeground(new Color(0x006666));
+
+        //---- groupModeCheckBox ----
+        groupModeCheckBox.setForeground(new Color(0x006666));
+        groupModeCheckBox.setAction(action39);
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addContainerGap()
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 296, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addComponent(CompPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(toolBar1, GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
-                        .addComponent(scrollPane2, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE))
+                            .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 1151, Short.MAX_VALUE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(panel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(linkModeCheckBox)
+                            .addGap(18, 18, 18)
+                            .addComponent(groupModeCheckBox)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
+                            .addComponent(CompPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addGap(6, 6, 6)
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(toolBar1, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(scrollPane2))
+                            .addGap(6, 6, 6)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addComponent(CompPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(panel3, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(CompPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 671, GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGap(15, 15, 15)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(linkModeCheckBox, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(groupModeCheckBox, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE)
                     .addGap(12, 12, 12))
         );
         pack();
@@ -1347,12 +1167,6 @@ public class CDesktopNew extends JFrame {
     private JLabel expidLabel;
     private JPanel panel3;
     private JLabel configNameLabel;
-    private JScrollPane scrollPane1;
-    private JList componentNameList;
-    private JToolBar toolBar1;
-    private JCheckBox linkModeCheckBox;
-    private JLabel afecsHomeLabel;
-    private JCheckBox groupModeCheckBox;
     private JPanel CompPanel;
     private JMenuBar menuBar2;
     private JMenu DaqMenu;
@@ -1370,11 +1184,13 @@ public class CDesktopNew extends JFrame {
     private JMenuItem Vtpmi;
     private JMenuItem Paggmi;
     private JMenuItem Saggmi;
+    private JMenuItem menuItem38;
     private JMenu ErsapMenu;
     private JMenuItem FileSourcemi;
     private JMenuItem etSourceMi;
     private JMenuItem actorMi;
     private JMenuItem histoActorMI;
+    private JMenuItem menuItem37;
     private JMenu EjfatMenu;
     private JMenuItem menuItem30;
     private JMenuItem menuItem33;
@@ -1383,6 +1199,8 @@ public class CDesktopNew extends JFrame {
     private JMenuItem Scmi;
     private JMenuItem menuItem35;
     private JMenuItem menuItem36;
+    private JCheckBox linkModeCheckBox;
+    private JCheckBox groupModeCheckBox;
     private ExitAction action1;
     private GridOnAction action2;
     private GridOffAction action3;
@@ -1424,77 +1242,6 @@ public class CDesktopNew extends JFrame {
         cd.setVisible(true);
     }
 
-    private void cbt(String componentType){
-        String s;
-        StringTokenizer st1,st2;
-        String name = "undefined",type = "undefined",sType = "undefined",desc = "undefined";
-        int id = 0;
-
-        StringBuilder sb = new StringBuilder();
-        Set<String> hs = new HashSet<String>();
-
-        if(componentType.equalsIgnoreCase(("out"))) componentType = ACodaType.SINK.name();
-        scrollPane1.setBorder(new TitledBorder(null, componentType, TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
-                new Font("Bitstream Charter", Font.PLAIN, 11), new Color(0, 102, 102)));
-        listModel.clear();
-        if(new File(stp.getCoolHome()+File.separator+
-                stp.getExpid()+File.separator+
-                "jcedit"+File.separator+componentType+".txt").exists()){
-            try {
-                BufferedReader r = new BufferedReader(new FileReader(stp.getCoolHome()+
-                        File.separator+stp.getExpid()+
-                        File.separator+"jcedit"+
-                        File.separator+componentType+".txt"));
-
-                // read entire file
-                while((s = r.readLine())!=null){
-                    sb.append(s);
-                    if(!s.endsWith("@@")){
-                        sb.append("\n");
-                    }
-                }
-                // get single component record
-                st1 = new StringTokenizer(sb.toString(),"@@");
-                while(st1.hasMoreTokens()){
-                    // get data
-                    st2 = new StringTokenizer(st1.nextToken(),"$");
-
-                    if(st2.hasMoreTokens()) name  = st2.nextToken();
-
-                    if(st2.hasMoreTokens()) type  = st2.nextToken();
-
-                    if(st2.hasMoreTokens()) sType = st2.nextToken();
-
-                    try{
-                        if(st2.hasMoreTokens()) id  = Integer.parseInt(st2.nextToken());
-                    } catch(NumberFormatException e){
-                        System.out.println(e.getMessage());
-                    }
-
-                    if(st2.hasMoreTokens()) desc  = st2.nextToken();
-                    hs.add(name +
-                            "                                     :^" + type +
-                            "#^" + sType +
-                            "@^" + id +
-                            "%^" + desc);
-
-                }
-
-                r.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            Set<String> ts = new TreeSet(hs);
-
-            // sorting alphabetically using the list
-            List<String> l = new ArrayList<>(ts);
-            Collections.sort(l);
-            for(String ss:l){
-                listModel.addElement(ss);
-            }
-        }
-    }
 
     /**
      *
@@ -1575,7 +1322,7 @@ public class CDesktopNew extends JFrame {
         // get current editing supervisor component from the canvas
         JCGComponent current_supervisor = drawingCanvas.getSupervisor();
 
-        if(current_supervisor.getPrcesses()==null || current_supervisor.getPrcesses().isEmpty()) return;
+        if(current_supervisor.getProcesses()==null || current_supervisor.getProcesses().isEmpty()) return;
 
         for(String f_runType: runTypes){
 
@@ -1608,7 +1355,7 @@ public class CDesktopNew extends JFrame {
 
                     if (c.getName().equals(f_runType)) {
                         // update the requested supervisor processes
-                        c.setPrcesses(current_supervisor.getPrcesses());
+                        c.setProcesses(current_supervisor.getProcesses());
                     }
                 }
 
@@ -2220,7 +1967,7 @@ public class CDesktopNew extends JFrame {
                         _pName = com.getName();
                         com.setName(name);
                         com.setDescription(description);
-                        for (JCGLink l : com.getLnks()) {
+                        for (JCGLink l : com.getLinks()) {
                             if (l.getSourceComponentName().equals(_pName)) {
                                 l.setSourceComponentName(name);
                                 l.setName(l.getSourceComponentName() + "_" + l.getDestinationComponentName());
@@ -2228,7 +1975,7 @@ public class CDesktopNew extends JFrame {
                                 l.setDestinationComponentName(name);
                                 l.setName(l.getSourceComponentName() + "_" + l.getDestinationComponentName());
                             }
-                            for (JCGTransport t : com.getTrnsports()) {
+                            for (JCGTransport t : com.getTransports()) {
                                 t.setName(t.getName().replace(_pName, name));
                                 t.setEtName(t.getEtName().replace(_pName, name));
                                 l.setDestinationTransportName(t.getName());
@@ -2475,17 +2222,17 @@ public class CDesktopNew extends JFrame {
             JCTools.getRTVsInAString(c.getRol2UsrString(),rtvs);
             JCTools.getRTVsInAString(c.getUserConfig(),rtvs);
 
-            for(JCGProcess p:c.getPrcesses()){
+            for(JCGProcess p:c.getProcesses()){
                 JCTools.getRTVsInAString(p.getScriptCommand(), rtvs);
             }
-            for(JCGTransport t:c.getTrnsports()){
+            for(JCGTransport t:c.getTransports()){
                 JCTools.getRTVsInAString(t.getFileName(),rtvs);
             }
         }
 
         // check for RTVs in processes for supervisor agent
         JCGComponent gc = drawingCanvas.getSupervisor();
-        for(JCGProcess p:gc.getPrcesses()){
+        for(JCGProcess p:gc.getProcesses()){
             JCTools.getRTVsInAString(p.getScriptCommand(), rtvs);
         }
 
@@ -2850,7 +2597,7 @@ public class CDesktopNew extends JFrame {
             } else {
                 for(JCGComponent c:drawingCanvas.getGCMPs().values()){
 
-                    for (JCGTransport t:c.getTrnsports()){
+                    for (JCGTransport t:c.getTransports()){
                         if (t.getFileName().contains("$")){
                             if(t.getFileName().charAt(t.getFileName().indexOf("$") + 1) !='(' ) {
                                 isSyntaxError = true;

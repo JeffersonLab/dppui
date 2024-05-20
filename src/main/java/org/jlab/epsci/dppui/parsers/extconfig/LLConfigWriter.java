@@ -270,7 +270,7 @@ public class LLConfigWriter {
                     if (tr.getEtEventNum() < etEvtMin1) {
                         tr.setEtEventNum(etEvtMin1);
                         JCGComponent c = CDesktopNew.getDrawingCvanvas().getGCMPs().get(cName);
-                        for (JCGTransport t : c.getTrnsports()) {
+                        for (JCGTransport t : c.getTransports()) {
                             if (t.getName().equals(tr.getName())) {
                                 t.setEtEventNum(tr.getEtEventNum());
                                 break;
@@ -281,7 +281,7 @@ public class LLConfigWriter {
                     if (tr.getEtEventNum() < etEvtMin2) {
                         tr.setEtEventNum(etEvtMin2);
                         JCGComponent c = CDesktopNew.getDrawingCvanvas().getGCMPs().get(cName);
-                        for (JCGTransport t : c.getTrnsports()) {
+                        for (JCGTransport t : c.getTransports()) {
                             if (t.getName().equals(tr.getName())) {
                                 t.setEtEventNum(tr.getEtEventNum());
                                 break;
@@ -355,7 +355,7 @@ public class LLConfigWriter {
                         if (tr.getEtEventNum() < etEvtMin1) {
                             tr.setEtEventNum(etEvtMin1);
                             JCGComponent c = CDesktopNew.getDrawingCvanvas().getGCMPs().get(cName);
-                            for (JCGTransport t : c.getTrnsports()) {
+                            for (JCGTransport t : c.getTransports()) {
                                 if (t.getName().equals(tr.getName())) {
                                     t.setEtEventNum(tr.getEtEventNum());
                                     break;
@@ -366,7 +366,7 @@ public class LLConfigWriter {
                         if (tr.getEtEventNum() < etEvtMin2) {
                             tr.setEtEventNum(etEvtMin2);
                             JCGComponent c = CDesktopNew.getDrawingCvanvas().getGCMPs().get(cName);
-                            for (JCGTransport t : c.getTrnsports()) {
+                            for (JCGTransport t : c.getTransports()) {
                                 if (t.getName().equals(tr.getName())) {
                                     t.setEtEventNum(tr.getEtEventNum());
                                     break;
@@ -1002,20 +1002,20 @@ public class LLConfigWriter {
                 out.write("isMaster              = " + cmp.isMaster() + "\n");
                 boolean breakFlag = false;
 
-                if (cmp.getLnks().isEmpty()) {
+                if (cmp.getLinks().isEmpty()) {
                     out.write("output                = None \n");
 
                 } else {
-                    for (JCGLink l : cmp.getLnks()) {
+                    for (JCGLink l : cmp.getLinks()) {
 
                         if (l.getDestinationComponentName() != null &&
-                                _compMap.get(l.getDestinationComponentName()).getTrnsports() != null) {
+                                _compMap.get(l.getDestinationComponentName()).getTransports() != null) {
 
                             for (JCGChannel ch : _compDat.get(l.getSourceComponentName()).getoChannels().values()) {
                                 group = ch.getGroup();
                             }
 
-                            for (JCGTransport tt : _compMap.get(l.getDestinationComponentName()).getTrnsports()) {
+                            for (JCGTransport tt : _compMap.get(l.getDestinationComponentName()).getTransports()) {
                                 if (tt.getName().equals(l.getDestinationTransportName())) {
 
 
@@ -1213,7 +1213,7 @@ public class LLConfigWriter {
      */
     private ArrayList<JCGLink> getInputLinks(JCGComponent cmp) {
         ArrayList<JCGLink> lo = new ArrayList<JCGLink>();
-        for (JCGLink l : cmp.getLnks()) {
+        for (JCGLink l : cmp.getLinks()) {
             if (l.getDestinationComponentName().equals((cmp.getName()))) {
                 lo.add(l);
             }
@@ -1223,7 +1223,7 @@ public class LLConfigWriter {
 
     private ArrayList<JCGLink> getOutputLinks(JCGComponent cmp) {
         ArrayList<JCGLink> lo = new ArrayList<>();
-        for (JCGLink l : cmp.getLnks()) {
+        for (JCGLink l : cmp.getLinks()) {
             if (l.getSourceComponentName().equals((cmp.getName()))) {
                 lo.add(l);
             }
@@ -1237,7 +1237,7 @@ public class LLConfigWriter {
         st.nextToken();
         String dName = st.nextToken();
 //        for(JCGTransport t:DrawingCanvas.getComp(l.getDestinationComponentName()).getTrnsports()){
-        for (JCGTransport t : _compMap.get(l.getDestinationComponentName()).getTrnsports()) {
+        for (JCGTransport t : _compMap.get(l.getDestinationComponentName()).getTransports()) {
             if (t.getName().startsWith(dName)) {
                 return t;
             }
@@ -1249,7 +1249,7 @@ public class LLConfigWriter {
         StringTokenizer st = new StringTokenizer(l.getName(), "_");
         String dName = st.nextToken();
 //        for(JCGTransport t:DrawingCanvas.getComp(l.getSourceComponentName()).getTrnsports()){
-        for (JCGTransport t : _compMap.get(l.getSourceComponentName()).getTrnsports()) {
+        for (JCGTransport t : _compMap.get(l.getSourceComponentName()).getTransports()) {
             if (t.getName().startsWith(dName)) {
                 return t;
             }
@@ -1327,7 +1327,7 @@ public class LLConfigWriter {
         ArrayList<JCGLink> ol = getOutputLinks(component);
         if (!ol.isEmpty()) {
             for (JCGLink l : ol) {
-                for (JCGTransport tt : _compMap.get(l.getSourceComponentName()).getTrnsports()) {
+                for (JCGTransport tt : _compMap.get(l.getSourceComponentName()).getTransports()) {
                     if (tt.getName().equals(l.getSourceTransportName())) {
 
                         if (tt.getTransClass().equals("Et")) {
@@ -1345,7 +1345,7 @@ public class LLConfigWriter {
                     }
                 }
 
-                for (JCGTransport tt : _compMap.get(l.getDestinationComponentName()).getTrnsports()) {
+                for (JCGTransport tt : _compMap.get(l.getDestinationComponentName()).getTransports()) {
                     if (tt.getName().equals(l.getDestinationTransportName())) {
 
                         if (tt.getTransClass().equals("Et")) {

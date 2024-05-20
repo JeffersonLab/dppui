@@ -90,7 +90,7 @@ public class SComponentForm extends JFrame {
             okAllButton.setEnabled(false);
         }
         // recreate processes combo box
-        for(JCGProcess pr:component.getPrcesses()){
+        for(JCGProcess pr:component.getProcesses()){
             processID++;
             addProcessCombo(pr.getName());
         }
@@ -483,7 +483,7 @@ public class SComponentForm extends JFrame {
 //        parentCanvas.dumpGCMPs();
 
         for(JCGComponent com:parentCanvas.getGCMPs().values()){
-            for(JCGLink l:com.getLnks()){
+            for(JCGLink l:com.getLinks()){
                 if(l.getSourceComponentName().equals(pName)){
                     l.setSourceComponentName(component.getName());
                     l.setSourceComponentType(component.getType());
@@ -494,7 +494,7 @@ public class SComponentForm extends JFrame {
                     l.setDestinationComponentType(component.getType());
                     l.setName(l.getSourceComponentName()+"_"+l.getDestinationComponentName());
                     if(DrawingCanvas.getComp(l.getDestinationComponentName())!=null){
-                        for(JCGTransport tr: DrawingCanvas.getComp(l.getDestinationComponentName()).getTrnsports()){
+                        for(JCGTransport tr: DrawingCanvas.getComp(l.getDestinationComponentName()).getTransports()){
                             tr.setEtName("/tmp/et_" + stp.getExpid() + "_" +l.getDestinationComponentName());
                         }
                     }
@@ -642,11 +642,17 @@ public class SComponentForm extends JFrame {
         buildTreadsSpinner = new JSpinner();
         label6 = new JLabel();
         endianCheckBox = new JCheckBox();
+        panel1 = new JPanel();
+        cliHostTextField = new JTextField();
+        scrollPane2 = new JScrollPane();
+        textField1 = new JTextField();
+        label7 = new JLabel();
+        label8 = new JLabel();
+        separator1 = new JSeparator();
         okButton = new JButton();
+        okAllButton = new JButton();
         clearButton = new JButton();
         cancelButton = new JButton();
-        separator1 = new JSeparator();
-        okAllButton = new JButton();
         action1 = new OkAction();
         action2 = new ClearAction();
         action3 = new CancelAction();
@@ -926,7 +932,7 @@ public class SComponentForm extends JFrame {
                                             .addComponent(endianCheckBox)
                                             .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(contentPanelLayout.createSequentialGroup()
-                                            .addComponent(tsCheckBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(tsCheckBox, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                                             .addGap(18, 18, 18)
                                             .addComponent(buildTreadsSpinner, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -979,11 +985,10 @@ public class SComponentForm extends JFrame {
                                 .addComponent(label2))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addComponent(configFileLabel2)
-                                    .addGap(1, 1, 1)
-                                    .addComponent(label3))
-                                .addComponent(scrollPane1))
+                                .addComponent(configFileLabel2)
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
+                            .addGap(1, 1, 1)
+                            .addComponent(label3)
                             .addGap(18, 18, 18)
                             .addGroup(contentPanelLayout.createParallelGroup()
                                 .addGroup(contentPanelLayout.createSequentialGroup()
@@ -998,72 +1003,132 @@ public class SComponentForm extends JFrame {
                                         .addComponent(tsSlopSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(label4)
                                         .addComponent(endianCheckBox)))
-                                .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
             }
 
-            //---- okButton ----
-            okButton.setAction(action1);
-            okButton.setText("Ok");
+            //======== panel1 ========
+            {
+                panel1.setBorder(new TitledBorder("Deployment"));
 
-            //---- clearButton ----
-            clearButton.setAction(action2);
+                //---- cliHostTextField ----
+                cliHostTextField.setText("undefined");
 
-            //---- cancelButton ----
-            cancelButton.setAction(action3);
-            cancelButton.setText("Cancel");
+                //======== scrollPane2 ========
+                {
+                    scrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+                    scrollPane2.setViewportView(textField1);
+                }
 
-            //---- okAllButton ----
-            okAllButton.setAction(action5);
-            okAllButton.setText("Apply to All");
-            okAllButton.setEnabled(false);
+                //---- label7 ----
+                label7.setText("Host");
+
+                //---- label8 ----
+                label8.setText("Command Line");
+
+                GroupLayout panel1Layout = new GroupLayout(panel1);
+                panel1.setLayout(panel1Layout);
+                panel1Layout.setHorizontalGroup(
+                    panel1Layout.createParallelGroup()
+                        .addGroup(panel1Layout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addGroup(panel1Layout.createParallelGroup()
+                                .addComponent(cliHostTextField, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(label7))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(panel1Layout.createParallelGroup()
+                                .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                                .addGroup(panel1Layout.createSequentialGroup()
+                                    .addComponent(label8)
+                                    .addGap(0, 426, Short.MAX_VALUE)))
+                            .addContainerGap())
+                );
+                panel1Layout.setVerticalGroup(
+                    panel1Layout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(label7)
+                                .addComponent(label8))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panel1Layout.createSequentialGroup()
+                                    .addComponent(cliHostTextField, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(8, 8, 8)))
+                            .addContainerGap())
+                );
+            }
 
             GroupLayout dialogPaneLayout = new GroupLayout(dialogPane);
             dialogPane.setLayout(dialogPaneLayout);
             dialogPaneLayout.setHorizontalGroup(
                 dialogPaneLayout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, dialogPaneLayout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(okButton)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(okAllButton)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clearButton, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(cancelButton)
-                        .addContainerGap())
                     .addComponent(contentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(separator1, GroupLayout.Alignment.TRAILING)
+                    .addGroup(dialogPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(separator1)
+                        .addContainerGap())
+                    .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
             dialogPaneLayout.setVerticalGroup(
                 dialogPaneLayout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, dialogPaneLayout.createSequentialGroup()
-                        .addComponent(contentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(separator1, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(dialogPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(clearButton)
-                            .addComponent(cancelButton)
-                            .addComponent(okAllButton)
-                            .addComponent(okButton)))
+                        .addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(separator1, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE))
             );
         }
+
+        //---- okButton ----
+        okButton.setAction(action1);
+        okButton.setText("Ok");
+
+        //---- okAllButton ----
+        okAllButton.setAction(action5);
+        okAllButton.setText("Apply to All");
+        okAllButton.setEnabled(false);
+
+        //---- clearButton ----
+        clearButton.setAction(action2);
+
+        //---- cancelButton ----
+        cancelButton.setAction(action3);
+        cancelButton.setText("Cancel");
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(dialogPane, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                        .addComponent(dialogPane, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(0, 347, Short.MAX_VALUE)
+                            .addComponent(okButton)
+                            .addGap(18, 18, 18)
+                            .addComponent(okAllButton)
+                            .addGap(18, 18, 18)
+                            .addComponent(clearButton, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cancelButton)))
                     .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                .addGroup(contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(dialogPane, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(dialogPane, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(cancelButton)
+                        .addComponent(clearButton)
+                        .addComponent(okAllButton)
+                        .addComponent(okButton))
+                    .addGap(14, 14, 14))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -1108,11 +1173,17 @@ public class SComponentForm extends JFrame {
     private JSpinner buildTreadsSpinner;
     private JLabel label6;
     private JCheckBox endianCheckBox;
+    private JPanel panel1;
+    private JTextField cliHostTextField;
+    private JScrollPane scrollPane2;
+    private JTextField textField1;
+    private JLabel label7;
+    private JLabel label8;
+    private JSeparator separator1;
     private JButton okButton;
+    private JButton okAllButton;
     private JButton clearButton;
     private JButton cancelButton;
-    private JSeparator separator1;
-    private JButton okAllButton;
     private OkAction action1;
     private ClearAction action2;
     private CancelAction action3;
@@ -1146,7 +1217,7 @@ public class SComponentForm extends JFrame {
             } else {
 
                 // open existing process in the form
-                for(JCGProcess gp:component.getPrcesses()){
+                for(JCGProcess gp:component.getProcesses()){
                     if((processComboBox.getSelectedItem()).equals(gp.getName())){
 
                         // start a process form
