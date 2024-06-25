@@ -65,15 +65,15 @@ public class JCGComponent {
 
     @XmlElementWrapper(name = "links")
     @XmlElement(name="link")
-    private Set<JCGLink> links
+    private Set<JCGLink> linkSet
             = Collections.synchronizedSet(new HashSet<>());
     @XmlElementWrapper(name = "transports")
     @XmlElement(name="transport")
-    private Set<JCGTransport> transports
+    private Set<JCGTransport> transportSet
             = Collections.synchronizedSet(new HashSet<>());
     @XmlElementWrapper(name = "processes")
     @XmlElement(name="process")
-    private Set<JCGProcess> processes
+    private Set<JCGProcess> processeSet
             = Collections.synchronizedSet(new HashSet<>());
     private BufferedImage                          image;
 
@@ -143,15 +143,15 @@ public class JCGComponent {
         this.image = image;
 
         for(JCGLink l:links){
-            this.links.add(JCTools.deepCpLink(l));
+            this.linkSet.add(JCTools.deepCpLink(l));
         }
 
         for(JCGTransport t:transports){
-            this.transports.add(JCTools.deepCpTransport(t));
+            this.transportSet.add(JCTools.deepCpTransport(t));
         }
 
         for(JCGProcess p:processes){
-            this.processes.add(JCTools.deepCpProcess(p));
+            this.processeSet.add(JCTools.deepCpProcess(p));
         }
     }
 
@@ -262,32 +262,32 @@ public class JCGComponent {
     }
 
     public Set<JCGProcess> getProcesses() {
-        return processes;
+        return processeSet;
     }
 
-    public void setProcesses(Set<JCGProcess> processes) {
-        this.processes = processes;
+    public void setProcesses(Set<JCGProcess> processeSet) {
+        this.processeSet = processeSet;
     }
 
     public void addProcess(JCGProcess p){
         removeProcess(p);
-        processes.add(p);
+        processeSet.add(p);
     }
 
     public void removeProcess(JCGProcess pn){
         JCGProcess p = null;
-        for(JCGProcess tmp:processes){
+        for(JCGProcess tmp: processeSet){
             if(tmp.getName().equals(pn.getName())){
                 p = tmp;
                 break;
             }
         }
         if(p!=null)
-            processes.remove(p);
+            processeSet.remove(p);
     }
 
     public void removeAllProcesses(){
-        processes.clear();
+        processeSet.clear();
     }
 
 
@@ -332,66 +332,66 @@ public class JCGComponent {
     }
 
     public Set<JCGTransport> getTransports() {
-        return transports;
+        return transportSet;
     }
 
-    public void setTransports(Set<JCGTransport> transports) {
-        this.transports = transports;
+    public void setTransports(Set<JCGTransport> transportSet) {
+        this.transportSet = transportSet;
     }
 
     public void addTransport(JCGTransport transport) {
         removeTransport(transport);
-        transports.add(transport);
+        transportSet.add(transport);
     }
 
 
     public void removeTransports(){
-        if(transports!=null && !transports.isEmpty())
-            transports.clear();
+        if(transportSet !=null && !transportSet.isEmpty())
+            transportSet.clear();
     }
 
     public void removeTransport(JCGTransport tn){
         JCGTransport t = null;
-        for(JCGTransport tmp:transports){
+        for(JCGTransport tmp: transportSet){
             if(tmp.getName().equals(tn.getName())){
                 t = tmp;
                 break;
             }
         }
         if(t!=null)
-            transports.remove(t);
+            transportSet.remove(t);
     }
 
     public Set<JCGLink> getLinks() {
-        return links;
+        return linkSet;
     }
 
-    public void setLinks(Set<JCGLink> links) {
-        this.links = links;
+    public void setLinks(Set<JCGLink> linkSet) {
+        this.linkSet = linkSet;
     }
 
     public void addLink(JCGLink link) {
         removeLink(link);
-        links.add(link);
+        linkSet.add(link);
      }
 
 
     public void removeLinks() {
-        if(links!=null && !links.isEmpty()){
-            links.clear();
+        if(linkSet !=null && !linkSet.isEmpty()){
+            linkSet.clear();
         }
     }
 
     public void removeLink(JCGLink ln){
         JCGLink l = null;
-        for(JCGLink tmp:links){
+        for(JCGLink tmp: linkSet){
             if(tmp.getName().equals(ln.getName())){
                 l = tmp;
                 break;
             }
         }
         if(l!=null)
-            links.remove(l);
+            linkSet.remove(l);
     }
 
     public JCGModule getModule() {
@@ -545,9 +545,9 @@ public class JCGComponent {
         if (!description.equals(that.getDescription())) return false;
 
 
-        if(links.size()!=that.getLinks().size()) return false;
+        if(linkSet.size()!=that.getLinks().size()) return false;
         else {
-            for(JCGLink t_this:links){
+            for(JCGLink t_this: linkSet){
                 boolean f = false;
                 for(JCGLink t_that:that.getLinks()){
                     if(t_this.equals(t_that)){
@@ -559,9 +559,9 @@ public class JCGComponent {
             }
         }
 
-        if(processes.size()!=that.getProcesses().size()) return false;
+        if(processeSet.size()!=that.getProcesses().size()) return false;
         else {
-            for(JCGProcess t_this:processes){
+            for(JCGProcess t_this: processeSet){
                 boolean f = false;
                 for(JCGProcess t_that:that.getProcesses()){
                     if(t_this.equals(t_that)){
@@ -573,9 +573,9 @@ public class JCGComponent {
             }
         }
 
-        if(transports.size()!=that.getTransports().size()) return false;
+        if(transportSet.size()!=that.getTransports().size()) return false;
         else {
-             for(JCGTransport t_this:transports){
+             for(JCGTransport t_this: transportSet){
                  boolean f = false;
                  for(JCGTransport t_that:that.getTransports()){
                      if(t_this.equals(t_that)){
@@ -618,9 +618,9 @@ public class JCGComponent {
                 ", command='" + command + '\'' +
                 ", isMaster=" + isMaster +
                 ", module=" + module +
-                ", links=" + links +
-                ", transports=" + transports +
-                ", processes=" + processes +
+                ", links=" + linkSet +
+                ", transports=" + transportSet +
+                ", processes=" + processeSet +
                 ", image=" + image +
                 ", deployHost='" + deployHost + '\'' +
                 ", deployCli='" + deployCli + '\'' +

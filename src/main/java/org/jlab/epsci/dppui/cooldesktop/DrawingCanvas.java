@@ -617,6 +617,7 @@ public class DrawingCanvas extends JPanel {
                 res = endType.equals(ACodaType.SAGG.name()) ||
                         endType.equals(ACodaType.ER.name()) ||
                         endType.equals(ACodaType.USR.name()) ||
+                        endType.equals(ACodaType.ET.name()) ||
                         endType.equals(ACodaType.SINK.name());
                 break;
             case DC:
@@ -651,7 +652,7 @@ public class DrawingCanvas extends JPanel {
                 !lineStartGc.equals(lineEndGc) &&
                 !lineStartGc.equals("undefined") &&
                 !lineEndGc.equals("undefined") &&
-                isLinkAllowed(lineStartGcType, lineEndGcType) &&
+//                isLinkAllowed(lineStartGcType, lineEndGcType) &&
                 !GCMPs.isEmpty()) {
 
             JCGLink gle = null;

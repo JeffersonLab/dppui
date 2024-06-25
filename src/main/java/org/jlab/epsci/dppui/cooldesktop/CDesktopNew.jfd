@@ -560,6 +560,14 @@ scrollPane2.setViewportView(drawingCanvas);
                 <void property="name">
                  <string>Vtpmi</string>
                 </void>
+                <void method="addEvent">
+                 <object class="com.jformdesigner.model.FormEvent">
+                  <string>java.awt.event.MouseListener</string>
+                  <string>mousePressed</string>
+                  <string>VtpmiMousePressed</string>
+                  <boolean>true</boolean>
+                 </object>
+                </void>
                </object>
               </void>
               <void method="add">
@@ -586,6 +594,14 @@ scrollPane2.setViewportView(drawingCanvas);
                 </void>
                 <void property="name">
                  <string>Paggmi</string>
+                </void>
+                <void method="addEvent">
+                 <object class="com.jformdesigner.model.FormEvent">
+                  <string>java.awt.event.MouseListener</string>
+                  <string>mousePressed</string>
+                  <string>PaggmiMousePressed</string>
+                  <boolean>true</boolean>
+                 </object>
                 </void>
                </object>
               </void>
@@ -614,6 +630,14 @@ scrollPane2.setViewportView(drawingCanvas);
                 <void property="name">
                  <string>Saggmi</string>
                 </void>
+                <void method="addEvent">
+                 <object class="com.jformdesigner.model.FormEvent">
+                  <string>java.awt.event.MouseListener</string>
+                  <string>mousePressed</string>
+                  <string>SaggmiMousePressed</string>
+                  <boolean>true</boolean>
+                 </object>
+                </void>
                </object>
               </void>
               <void method="add">
@@ -639,7 +663,15 @@ scrollPane2.setViewportView(drawingCanvas);
                  </object>
                 </void>
                 <void property="name">
-                 <string>menuItem38</string>
+                 <string>Etmi</string>
+                </void>
+                <void method="addEvent">
+                 <object class="com.jformdesigner.model.FormEvent">
+                  <string>java.awt.event.MouseListener</string>
+                  <string>mousePressed</string>
+                  <string>EtmiMousePressed</string>
+                  <boolean>true</boolean>
+                 </object>
                 </void>
                </object>
               </void>
@@ -665,17 +697,25 @@ scrollPane2.setViewportView(drawingCanvas);
               <string>javax.swing.JMenuItem</string>
               <void method="setProperty">
                <string>text</string>
-               <string>File Source</string>
+               <string>FileSource</string>
               </void>
               <void method="setProperty">
                <string>icon</string>
                <object class="com.jformdesigner.model.SwingIcon">
                 <int>0</int>
-                <string>/SINK_source.png</string>
+                <string>/FILESOURCE.png</string>
                </object>
               </void>
               <void property="name">
                <string>FileSourcemi</string>
+              </void>
+              <void method="addEvent">
+               <object class="com.jformdesigner.model.FormEvent">
+                <string>java.awt.event.MouseListener</string>
+                <string>mousePressed</string>
+                <string>FileSourcemiMousePressed</string>
+                <boolean>true</boolean>
+               </object>
               </void>
              </object>
             </void>
@@ -692,17 +732,25 @@ scrollPane2.setViewportView(drawingCanvas);
               <string>javax.swing.JMenuItem</string>
               <void method="setProperty">
                <string>text</string>
-               <string>ET Source</string>
+               <string>ETSource</string>
               </void>
               <void method="setProperty">
                <string>icon</string>
                <object class="com.jformdesigner.model.SwingIcon">
                 <int>0</int>
-                <string>/ET_source.png</string>
+                <string>/ETSOURCE.png</string>
                </object>
               </void>
               <void property="name">
                <string>etSourceMi</string>
+              </void>
+              <void method="addEvent">
+               <object class="com.jformdesigner.model.FormEvent">
+                <string>java.awt.event.MouseListener</string>
+                <string>mousePressed</string>
+                <string>etSourceMiMousePressed</string>
+                <boolean>true</boolean>
+               </object>
               </void>
              </object>
             </void>
@@ -731,6 +779,14 @@ scrollPane2.setViewportView(drawingCanvas);
               <void property="name">
                <string>actorMi</string>
               </void>
+              <void method="addEvent">
+               <object class="com.jformdesigner.model.FormEvent">
+                <string>java.awt.event.MouseListener</string>
+                <string>mousePressed</string>
+                <string>actorMiMousePressed</string>
+                <boolean>true</boolean>
+               </object>
+              </void>
              </object>
             </void>
             <void method="add">
@@ -746,17 +802,25 @@ scrollPane2.setViewportView(drawingCanvas);
               <string>javax.swing.JMenuItem</string>
               <void method="setProperty">
                <string>text</string>
-               <string>Histogram Sink</string>
+               <string>HistogramSink</string>
               </void>
               <void method="setProperty">
                <string>icon</string>
                <object class="com.jformdesigner.model.SwingIcon">
                 <int>0</int>
-                <string>/SINK_histogram.png</string>
+                <string>/HISTOGRAMSINK.png</string>
                </object>
               </void>
               <void property="name">
                <string>histoActorMI</string>
+              </void>
+              <void method="addEvent">
+               <object class="com.jformdesigner.model.FormEvent">
+                <string>java.awt.event.MouseListener</string>
+                <string>mousePressed</string>
+                <string>histoActorMIMousePressed</string>
+                <boolean>true</boolean>
+               </object>
               </void>
              </object>
             </void>
@@ -773,17 +837,25 @@ scrollPane2.setViewportView(drawingCanvas);
               <string>javax.swing.JMenuItem</string>
               <void method="setProperty">
                <string>text</string>
-               <string>DevNull Sink</string>
+               <string>DevNullSink</string>
               </void>
               <void method="setProperty">
                <string>icon</string>
                <object class="com.jformdesigner.model.SwingIcon">
                 <int>0</int>
-                <string>/DevNullSink.png</string>
+                <string>/DEVNULLSINK.png</string>
                </object>
               </void>
               <void property="name">
-               <string>menuItem37</string>
+               <string>devNulmi</string>
+              </void>
+              <void method="addEvent">
+               <object class="com.jformdesigner.model.FormEvent">
+                <string>java.awt.event.MouseListener</string>
+                <string>mousePressed</string>
+                <string>devNulmiMousePressed</string>
+                <boolean>true</boolean>
+               </object>
               </void>
              </object>
             </void>
@@ -813,11 +885,19 @@ scrollPane2.setViewportView(drawingCanvas);
                <string>icon</string>
                <object class="com.jformdesigner.model.SwingIcon">
                 <int>0</int>
-                <string>/PACKETIZE.png</string>
+                <string>/PACKETIZER.png</string>
                </object>
               </void>
               <void property="name">
-               <string>menuItem30</string>
+               <string>ejfatPacketmi</string>
+              </void>
+              <void method="addEvent">
+               <object class="com.jformdesigner.model.FormEvent">
+                <string>java.awt.event.MouseListener</string>
+                <string>mousePressed</string>
+                <string>ejfatPacketmiMousePressed</string>
+                <boolean>true</boolean>
+               </object>
               </void>
              </object>
             </void>
@@ -834,17 +914,25 @@ scrollPane2.setViewportView(drawingCanvas);
               <string>javax.swing.JMenuItem</string>
               <void method="setProperty">
                <string>text</string>
-               <string>Load Balancer</string>
+               <string>LoadBalancer</string>
               </void>
               <void method="setProperty">
                <string>icon</string>
                <object class="com.jformdesigner.model.SwingIcon">
                 <int>0</int>
-                <string>/LB.png</string>
+                <string>/LOADBALANCER.png</string>
                </object>
               </void>
               <void property="name">
-               <string>menuItem33</string>
+               <string>ejfatLbmi</string>
+              </void>
+              <void method="addEvent">
+               <object class="com.jformdesigner.model.FormEvent">
+                <string>java.awt.event.MouseListener</string>
+                <string>mousePressed</string>
+                <string>ejfatLbmiMousePressed</string>
+                <boolean>true</boolean>
+               </object>
               </void>
              </object>
             </void>
@@ -861,7 +949,7 @@ scrollPane2.setViewportView(drawingCanvas);
               <string>javax.swing.JMenuItem</string>
               <void method="setProperty">
                <string>text</string>
-               <string>Reassembly</string>
+               <string>Reassemble</string>
               </void>
               <void method="setProperty">
                <string>icon</string>
@@ -871,7 +959,15 @@ scrollPane2.setViewportView(drawingCanvas);
                </object>
               </void>
               <void property="name">
-               <string>menuItem34</string>
+               <string>ejfatReassemblemi</string>
+              </void>
+              <void method="addEvent">
+               <object class="com.jformdesigner.model.FormEvent">
+                <string>java.awt.event.MouseListener</string>
+                <string>mousePressed</string>
+                <string>ejfatReassemblemiMousePressed</string>
+                <boolean>true</boolean>
+               </object>
               </void>
              </object>
             </void>
@@ -922,7 +1018,7 @@ scrollPane2.setViewportView(drawingCanvas);
               <string>javax.swing.JMenuItem</string>
               <void method="setProperty">
                <string>text</string>
-               <string>Shell Process</string>
+               <string>ShellProcess</string>
               </void>
               <void method="setProperty">
                <string>icon</string>
@@ -949,7 +1045,7 @@ scrollPane2.setViewportView(drawingCanvas);
               <string>javax.swing.JMenuItem</string>
               <void method="setProperty">
                <string>text</string>
-               <string>Docker Container</string>
+               <string>DockerContainer</string>
               </void>
               <void method="setProperty">
                <string>icon</string>

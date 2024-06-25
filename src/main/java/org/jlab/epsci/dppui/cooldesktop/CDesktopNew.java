@@ -46,6 +46,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 /**
+ * ERSAP Data Processing Pipeline Graphical Editor (DPPGE)
  * @author gurjyan
  */
 public class CDesktopNew extends JFrame {
@@ -112,7 +113,7 @@ public class CDesktopNew extends JFrame {
             }
         });
         me = this;
-        setTitle("RCE v1.0   db = "+stp.getCoolHome()+"                                                                                                      ");
+        setTitle("ERSAP DPPGE v1.0   db = "+stp.getCoolHome()+"                                                                                                      ");
         setSize(1100, 930);
         setLocationByPlatform(true);
         rdfParser = new JCParser();
@@ -374,6 +375,66 @@ public class CDesktopNew extends JFrame {
         cnvs.addComponent(label);
     }
 
+    private void VtpmiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(Vtpmi.getText(), Vtpmi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void PaggmiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(Paggmi.getText(), Paggmi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void SaggmiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(Saggmi.getText(), Saggmi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void EtmiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(Etmi.getText(), Etmi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void FileSourcemiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(FileSourcemi.getText(), FileSourcemi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void etSourceMiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(etSourceMi.getText(), etSourceMi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void actorMiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(actorMi.getText(), actorMi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void histoActorMIMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(histoActorMI.getText(), histoActorMI.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void devNulmiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(devNulmi.getText(), devNulmi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void ejfatPacketmiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(ejfatPacketmi.getText(), ejfatPacketmi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void ejfatLbmiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(ejfatLbmi.getText(), ejfatLbmi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
+    private void ejfatReassemblemiMousePressed(MouseEvent e) {
+        JLabel label = new JLabel(ejfatReassemblemi.getText(), ejfatReassemblemi.getIcon(), JLabel.CENTER);
+        cnvs.addComponent(label);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
@@ -442,17 +503,17 @@ public class CDesktopNew extends JFrame {
         Vtpmi = new JMenuItem();
         Paggmi = new JMenuItem();
         Saggmi = new JMenuItem();
-        menuItem38 = new JMenuItem();
+        Etmi = new JMenuItem();
         ErsapMenu = new JMenu();
         FileSourcemi = new JMenuItem();
         etSourceMi = new JMenuItem();
         actorMi = new JMenuItem();
         histoActorMI = new JMenuItem();
-        menuItem37 = new JMenuItem();
+        devNulmi = new JMenuItem();
         EjfatMenu = new JMenu();
-        menuItem30 = new JMenuItem();
-        menuItem33 = new JMenuItem();
-        menuItem34 = new JMenuItem();
+        ejfatPacketmi = new JMenuItem();
+        ejfatLbmi = new JMenuItem();
+        ejfatReassemblemi = new JMenuItem();
         ProcMenu = new JMenu();
         Scmi = new JMenuItem();
         menuItem35 = new JMenuItem();
@@ -942,25 +1003,49 @@ public class CDesktopNew extends JFrame {
                         //---- Vtpmi ----
                         Vtpmi.setText("VTP");
                         Vtpmi.setIcon(new ImageIcon(getClass().getResource("/VTP.png")));
+                        Vtpmi.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                VtpmiMousePressed(e);
+                            }
+                        });
                         StrMenu.add(Vtpmi);
                         StrMenu.addSeparator();
 
                         //---- Paggmi ----
                         Paggmi.setText("PAGG");
                         Paggmi.setIcon(new ImageIcon(getClass().getResource("/PAGG.png")));
+                        Paggmi.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                PaggmiMousePressed(e);
+                            }
+                        });
                         StrMenu.add(Paggmi);
                         StrMenu.addSeparator();
 
                         //---- Saggmi ----
                         Saggmi.setText("SAGG");
                         Saggmi.setIcon(new ImageIcon(getClass().getResource("/SAGG.png")));
+                        Saggmi.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                SaggmiMousePressed(e);
+                            }
+                        });
                         StrMenu.add(Saggmi);
                         StrMenu.addSeparator();
 
-                        //---- menuItem38 ----
-                        menuItem38.setText("ET");
-                        menuItem38.setIcon(new ImageIcon(getClass().getResource("/ET.png")));
-                        StrMenu.add(menuItem38);
+                        //---- Etmi ----
+                        Etmi.setText("ET");
+                        Etmi.setIcon(new ImageIcon(getClass().getResource("/ET.png")));
+                        Etmi.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                EtmiMousePressed(e);
+                            }
+                        });
+                        StrMenu.add(Etmi);
                     }
                     DaqMenu.add(StrMenu);
                 }
@@ -971,33 +1056,63 @@ public class CDesktopNew extends JFrame {
                     ErsapMenu.setText("ERSAP");
 
                     //---- FileSourcemi ----
-                    FileSourcemi.setText("File Source");
-                    FileSourcemi.setIcon(new ImageIcon(getClass().getResource("/SINK_source.png")));
+                    FileSourcemi.setText("FileSource");
+                    FileSourcemi.setIcon(new ImageIcon(getClass().getResource("/FILESOURCE.png")));
+                    FileSourcemi.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            FileSourcemiMousePressed(e);
+                        }
+                    });
                     ErsapMenu.add(FileSourcemi);
                     ErsapMenu.addSeparator();
 
                     //---- etSourceMi ----
-                    etSourceMi.setText("ET Source");
-                    etSourceMi.setIcon(new ImageIcon(getClass().getResource("/ET_source.png")));
+                    etSourceMi.setText("ETSource");
+                    etSourceMi.setIcon(new ImageIcon(getClass().getResource("/ETSOURCE.png")));
+                    etSourceMi.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            etSourceMiMousePressed(e);
+                        }
+                    });
                     ErsapMenu.add(etSourceMi);
                     ErsapMenu.addSeparator();
 
                     //---- actorMi ----
                     actorMi.setText("Actor");
                     actorMi.setIcon(new ImageIcon(getClass().getResource("/ACTOR.png")));
+                    actorMi.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            actorMiMousePressed(e);
+                        }
+                    });
                     ErsapMenu.add(actorMi);
                     ErsapMenu.addSeparator();
 
                     //---- histoActorMI ----
-                    histoActorMI.setText("Histogram Sink");
-                    histoActorMI.setIcon(new ImageIcon(getClass().getResource("/SINK_histogram.png")));
+                    histoActorMI.setText("HistogramSink");
+                    histoActorMI.setIcon(new ImageIcon(getClass().getResource("/HISTOGRAMSINK.png")));
+                    histoActorMI.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            histoActorMIMousePressed(e);
+                        }
+                    });
                     ErsapMenu.add(histoActorMI);
                     ErsapMenu.addSeparator();
 
-                    //---- menuItem37 ----
-                    menuItem37.setText("DevNull Sink");
-                    menuItem37.setIcon(new ImageIcon(getClass().getResource("/DevNullSink.png")));
-                    ErsapMenu.add(menuItem37);
+                    //---- devNulmi ----
+                    devNulmi.setText("DevNullSink");
+                    devNulmi.setIcon(new ImageIcon(getClass().getResource("/DEVNULLSINK.png")));
+                    devNulmi.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            devNulmiMousePressed(e);
+                        }
+                    });
+                    ErsapMenu.add(devNulmi);
                 }
                 menuBar2.add(ErsapMenu);
 
@@ -1005,22 +1120,40 @@ public class CDesktopNew extends JFrame {
                 {
                     EjfatMenu.setText("EJFAT");
 
-                    //---- menuItem30 ----
-                    menuItem30.setText("Packetizer");
-                    menuItem30.setIcon(new ImageIcon(getClass().getResource("/PACKETIZE.png")));
-                    EjfatMenu.add(menuItem30);
+                    //---- ejfatPacketmi ----
+                    ejfatPacketmi.setText("Packetizer");
+                    ejfatPacketmi.setIcon(new ImageIcon(getClass().getResource("/PACKETIZER.png")));
+                    ejfatPacketmi.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            ejfatPacketmiMousePressed(e);
+                        }
+                    });
+                    EjfatMenu.add(ejfatPacketmi);
                     EjfatMenu.addSeparator();
 
-                    //---- menuItem33 ----
-                    menuItem33.setText("Load Balancer");
-                    menuItem33.setIcon(new ImageIcon(getClass().getResource("/LB.png")));
-                    EjfatMenu.add(menuItem33);
+                    //---- ejfatLbmi ----
+                    ejfatLbmi.setText("LoadBalancer");
+                    ejfatLbmi.setIcon(new ImageIcon(getClass().getResource("/LOADBALANCER.png")));
+                    ejfatLbmi.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            ejfatLbmiMousePressed(e);
+                        }
+                    });
+                    EjfatMenu.add(ejfatLbmi);
                     EjfatMenu.addSeparator();
 
-                    //---- menuItem34 ----
-                    menuItem34.setText("Reassembly");
-                    menuItem34.setIcon(new ImageIcon(getClass().getResource("/REASSEMBLE.png")));
-                    EjfatMenu.add(menuItem34);
+                    //---- ejfatReassemblemi ----
+                    ejfatReassemblemi.setText("Reassemble");
+                    ejfatReassemblemi.setIcon(new ImageIcon(getClass().getResource("/REASSEMBLE.png")));
+                    ejfatReassemblemi.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            ejfatReassemblemiMousePressed(e);
+                        }
+                    });
+                    EjfatMenu.add(ejfatReassemblemi);
                 }
                 menuBar2.add(EjfatMenu);
 
@@ -1035,13 +1168,13 @@ public class CDesktopNew extends JFrame {
                     ProcMenu.addSeparator();
 
                     //---- menuItem35 ----
-                    menuItem35.setText("Shell Process");
+                    menuItem35.setText("ShellProcess");
                     menuItem35.setIcon(new ImageIcon(getClass().getResource("/ShellProcess.png")));
                     ProcMenu.add(menuItem35);
                     ProcMenu.addSeparator();
 
                     //---- menuItem36 ----
-                    menuItem36.setText("Docker Container");
+                    menuItem36.setText("DockerContainer");
                     menuItem36.setIcon(new ImageIcon(getClass().getResource("/DockerContainer.png")));
                     ProcMenu.add(menuItem36);
                 }
@@ -1184,17 +1317,17 @@ public class CDesktopNew extends JFrame {
     private JMenuItem Vtpmi;
     private JMenuItem Paggmi;
     private JMenuItem Saggmi;
-    private JMenuItem menuItem38;
+    private JMenuItem Etmi;
     private JMenu ErsapMenu;
     private JMenuItem FileSourcemi;
     private JMenuItem etSourceMi;
     private JMenuItem actorMi;
     private JMenuItem histoActorMI;
-    private JMenuItem menuItem37;
+    private JMenuItem devNulmi;
     private JMenu EjfatMenu;
-    private JMenuItem menuItem30;
-    private JMenuItem menuItem33;
-    private JMenuItem menuItem34;
+    private JMenuItem ejfatPacketmi;
+    private JMenuItem ejfatLbmi;
+    private JMenuItem ejfatReassemblemi;
     private JMenu ProcMenu;
     private JMenuItem Scmi;
     private JMenuItem menuItem35;

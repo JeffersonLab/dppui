@@ -97,21 +97,21 @@ public class SNLinkForm extends JFrame {
                     "ET"
             });
         } else if (gl.getDestinationComponentType().equals(ACodaType.ACTOR.name()) ||
-                gl.getDestinationComponentType().equals(ACodaType.HISTOGRAP_SINK.name()) ||
-                gl.getDestinationComponentType().equals(ACodaType.DEVNULL_SINK.name())
+                gl.getDestinationComponentType().equals(ACodaType.HISTOGRAMSINK.name()) ||
+                gl.getDestinationComponentType().equals(ACodaType.DEVNULLSINK.name())
         ) {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "ERSAP Transient"
             });
-        } else if (gl.getDestinationComponentType().equals(ACodaType.LOAD_BALANCER.name()) ||
-                gl.getDestinationComponentType().equals(ACodaType.REASSEMBLY.name())
+        } else if (gl.getDestinationComponentType().equals(ACodaType.LOADBALANCER.name()) ||
+                gl.getDestinationComponentType().equals(ACodaType.REASSEMBLE.name())
         ) {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EJFAT Transport"
             });
         } else if (gl.getDestinationComponentType().equals(ACodaType.APPLICATION.name()) ||
-                gl.getDestinationComponentType().equals(ACodaType.SHELL_PROCESS.name()) ||
-                gl.getDestinationComponentType().equals(ACodaType.DOCKER_CONTAINER.name())
+                gl.getDestinationComponentType().equals(ACodaType.SHELLPROCESS.name()) ||
+                gl.getDestinationComponentType().equals(ACodaType.DOCKERCONTAINER.name())
         ) {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "SSH"

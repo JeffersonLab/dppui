@@ -50,7 +50,7 @@ public class CCanvas {
         JCGComponent gc = new JCGComponent();
         String gCmpName = label.getText();
         String type = gCmpName.toUpperCase();
-
+        System.out.println("DDDDDDD "+type);
         String gCmpImageFile = File.separator + type + ".png";
         gc.setType(type);
         gc.setPreDefined(true);
